@@ -1,50 +1,85 @@
 {% extends "base.html" %}
 {% block title %}AI Paper Digest — {{ day.date }}{% endblock %}
 {% block content %}
-  <h1>{{ day.date_human }}</h1>
-  <p class="day-meta">
-    {{ day.paper_count }} papers announced on arXiv
-    ({{ day.categories | join(", ") }})
-    {%- if prev_date or next_date %} ·
-      {% if prev_date %}<a href="{{ root }}archive/{{ prev_date }}.html">&larr; {{ prev_date }}</a>{% endif %}
-      {% if next_date %}<a href="{{ root }}archive/{{ next_date }}.html">{{ next_date }} &rarr;</a>{% endif %}
-    {%- endif %}
-  </p>
+  <header class="masthead">
+    <h1>{{ day.date_human }}</h1>
+    <p class="day-meta">
+      <span class="stat">{{ day.paper_count }} papers</span>
+      <span class="stat">{{ day.categories | join(" · ") }}</span>
+      {% if prev_date %}<a class="stat" href="{{ root }}archive/{{ prev_date }}.html">&larr; {{ prev_date }}</a>{% endif %}
+      {% if next_date %}<a class="stat" href="{{ root }}archive/{{ next_date }}.html">{{ next_date }} &rarr;</a>{% endif %}
+    </p>
+  </header>
+
+  <nav class="topic-nav" aria-label="Sections">
+    {% if highlights %}
+    <a href="#highlights">Highlights <span class="n">{{ highlights | length }}</span></a>
+    {% endif %}
+    {% for topic, papers in topics %}
+    <a href="#{{ topic }}">{{ topic_labels.get(topic, topic) }} <span class="n">{{ papers | length }}</span></a>
+    {% endfor %}
+  </nav>
 
   {% if highlights %}
-  <section class="highlights">
+  <section class="highlights" id="highlights">
     <h2>Highlights</h2>
-    {% for paper in highlights %}
-    <article class="paper highlight">
-      <h3><a href="{{ paper.link }}">{{ paper.title }}</a></h3>
-      <p class="paper-meta">
-        {{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}
-        {% if paper.hf_upvotes %}<span class="badge">HF community pick</span>{% endif %}
-      </p>
-      <p>{{ paper.highlight_summary or paper.summary }}</p>
-    </article>
-    {% endfor %}
+    <div class="highlight-list">
+      {% for paper in highlights %}
+      <details class="paper highlight">
+        <summary>
+          <h3>{{ paper.title }}</h3>
+          <span class="paper-meta">
+            <span class="tag tag-accent">Highlight</span>
+            {% if paper.hf_upvotes %}<span class="tag">HF pick · {{ paper.hf_upvotes }}&#9650;</span>{% endif %}
+            {% if paper.topic %}<span class="tag">{{ topic_labels.get(paper.topic, paper.topic) }}</span>{% endif %}
+            <span class="authors">{{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}</span>
+          </span>
+          {% if paper.summary %}
+          <span class="paper-summary">{{ paper.summary }}</span>
+          {% endif %}
+        </summary>
+        <div class="paper-more">
+          {% if paper.highlight_summary %}
+          <p>{{ paper.highlight_summary }}</p>
+          {% endif %}
+          <p class="paper-links">
+            <a href="{{ paper.link }}">arXiv:{{ paper.id }}</a>
+            <a href="https://arxiv.org/pdf/{{ paper.id }}">PDF</a>
+          </p>
+        </div>
+      </details>
+      {% endfor %}
+    </div>
   </section>
   {% endif %}
 
   {% for topic, papers in topics %}
-  <section class="topic">
-    <h2 id="{{ topic }}">{{ topic_labels.get(topic, topic) }} <span class="count">({{ papers | length }})</span></h2>
-    {% for paper in papers %}
-    <article class="paper">
-      <h3><a href="{{ paper.link }}">{{ paper.title }}</a></h3>
-      <p class="paper-meta">
-        {{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}
-        · <span class="arxiv-id">arXiv:{{ paper.id }}</span>
-        {% if paper.announce_type == "cross" %}<span class="badge badge-cross">cross-listed</span>{% endif %}
-      </p>
-      {% if paper.summary %}
-      <p>{{ paper.summary }}</p>
-      {% else %}
-      <p class="no-summary">No summary available — see the <a href="{{ paper.link }}">abstract on arXiv</a>.</p>
-      {% endif %}
-    </article>
-    {% endfor %}
+  <section class="topic" id="{{ topic }}">
+    <h2>{{ topic_labels.get(topic, topic) }} <span class="count">{{ papers | length }}</span></h2>
+    <div class="topic-grid">
+      {% for paper in papers %}
+      <details class="paper">
+        <summary>
+          <h3>{{ paper.title }}</h3>
+          <span class="paper-meta">
+            <span class="authors">{{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}</span>
+            {% if paper.announce_type == "cross" %}<span class="tag">cross-listed</span>{% endif %}
+          </span>
+          {% if paper.summary %}
+          <span class="paper-summary">{{ paper.summary }}</span>
+          {% else %}
+          <span class="paper-summary no-summary">No summary available — see the abstract on arXiv.</span>
+          {% endif %}
+        </summary>
+        <div class="paper-more">
+          <p class="paper-links">
+            <a href="{{ paper.link }}">arXiv:{{ paper.id }}</a>
+            <a href="https://arxiv.org/pdf/{{ paper.id }}">PDF</a>
+          </p>
+        </div>
+      </details>
+      {% endfor %}
+    </div>
   </section>
   {% endfor %}
 {% endblock %}
