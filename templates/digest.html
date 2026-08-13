@@ -39,9 +39,17 @@
           {% endif %}
         </summary>
         <div class="paper-more">
-          {% if paper.highlight_summary %}
-          <p>{{ paper.highlight_summary }}</p>
+          {% for block in paper.highlight_blocks or [] %}
+          {% if block.kind == "ul" %}
+          <ul>
+            {% for item in block["items"] %}
+            <li>{{ item }}</li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <p>{{ block.text }}</p>
           {% endif %}
+          {% endfor %}
           <p class="paper-links">
             <a href="{{ paper.link }}">arXiv:{{ paper.id }}</a>
             <a href="https://arxiv.org/pdf/{{ paper.id }}">PDF</a>

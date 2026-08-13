@@ -32,10 +32,12 @@ PICK_PROMPT = (
 
 DEEP_PROMPT = (
     "You write the highlights section of a public daily digest of AI research papers. "
-    "Using the material below, write a four-to-six sentence treatment of the paper for a "
-    "technical reader: the problem and why it matters, the core idea or method, the main "
-    "results with concrete numbers where given, and any notable limitations. Plain prose, "
-    "no headings or bullets, do not repeat the title, do not open with 'This paper'.\n\n"
+    "Using the material below, write a structured treatment for a technical reader, in "
+    "plain text: first a one-to-two sentence overview of the problem and the core idea, "
+    "then 3-5 bullet lines each starting with '- ', each a single sentence covering one "
+    "point — how the method works, the main results with concrete numbers where given, "
+    "and notable limitations. No markdown besides the '- ' bullets, do not repeat the "
+    "title, do not open with 'This paper'.\n\n"
     "Title: {title}\n\n{body}"
 )
 

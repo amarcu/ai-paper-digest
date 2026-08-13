@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import shutil
 import sys
 from datetime import date as date_type
@@ -43,11 +44,40 @@ def _human_date(iso_date: str) -> str:
     return date_type.fromisoformat(iso_date).strftime("%A, %B %-d, %Y")
 
 
+_SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"(])")
+
+
+def _summary_blocks(text: str) -> list[dict]:
+    """Break a highlight deep summary into renderable blocks.
+
+    New-style summaries arrive as an overview paragraph plus '- ' bullet
+    lines; older ones are a single paragraph, which gets regrouped into
+    two-sentence paragraphs so it reads as prose rather than a wall.
+    """
+    blocks: list[dict] = []
+    for line in (l.strip() for l in text.splitlines() if l.strip()):
+        if line.startswith("- "):
+            if not blocks or blocks[-1]["kind"] != "ul":
+                blocks.append({"kind": "ul", "items": []})
+            blocks[-1]["items"].append(line[2:].strip())
+        else:
+            blocks.append({"kind": "p", "text": line})
+    if len(blocks) == 1 and blocks[0]["kind"] == "p":
+        sentences = _SENTENCE_SPLIT.split(blocks[0]["text"])
+        if len(sentences) > 2:
+            blocks = [{"kind": "p", "text": " ".join(sentences[i:i + 2])}
+                      for i in range(0, len(sentences), 2)]
+    return blocks
+
+
 def _load_days(data_dir: Path) -> list[dict]:
     days = []
     for path in sorted(data_dir.glob("*.json")):
         day = json.loads(path.read_text(encoding="utf-8"))
         day["date_human"] = _human_date(day["date"])
+        for paper in day["papers"]:
+            if paper.get("highlight_summary"):
+                paper["highlight_blocks"] = _summary_blocks(paper["highlight_summary"])
         days.append(day)
     return days
 
