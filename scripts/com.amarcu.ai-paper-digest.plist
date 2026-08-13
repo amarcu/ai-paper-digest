@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Install:
+       cp scripts/com.amarcu.ai-paper-digest.plist ~/Library/LaunchAgents/
+       launchctl load ~/Library/LaunchAgents/com.amarcu.ai-paper-digest.plist
+     Weekday runs at 09:30 local; the pipeline no-ops when arXiv has no new
+     announcements, and launchd retries missed slots when the Mac was asleep. -->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.amarcu.ai-paper-digest</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>/Users/amarcu/Work/github/amarcu/ai-paper-digest/scripts/run-daily.sh</string>
+  </array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Weekday</key><integer>1</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Weekday</key><integer>2</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Weekday</key><integer>3</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Weekday</key><integer>4</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>30</integer></dict>
+    <dict><key>Weekday</key><integer>5</integer><key>Hour</key><integer>9</integer><key>Minute</key><integer>30</integer></dict>
+  </array>
+  <key>StandardOutPath</key>
+  <string>/Users/amarcu/Library/Logs/ai-paper-digest.log</string>
+  <key>StandardErrorPath</key>
+  <string>/Users/amarcu/Library/Logs/ai-paper-digest.log</string>
+</dict>
+</plist>

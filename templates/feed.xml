@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+  <title>AI Paper Digest</title>
+  <link>{{ base_url }}</link>
+  <description>A daily, machine-summarized digest of new AI research papers from arXiv.</description>
+  <language>en</language>
+  <lastBuildDate>{{ build_date }}</lastBuildDate>
+  <atom:link href="{{ base_url }}feed.xml" rel="self" type="application/rss+xml"/>
+  {% for day in days %}
+  <item>
+    <title>AI Paper Digest — {{ day.date_human }} ({{ day.paper_count }} papers)</title>
+    <link>{{ base_url }}archive/{{ day.date }}.html</link>
+    <guid isPermaLink="true">{{ base_url }}archive/{{ day.date }}.html</guid>
+    <pubDate>{{ day.pub_date }}</pubDate>
+    <description>{{ day.feed_description | e }}</description>
+  </item>
+  {% endfor %}
+</channel>
+</rss>

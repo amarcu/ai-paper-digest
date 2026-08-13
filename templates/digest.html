@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}AI Paper Digest — {{ day.date }}{% endblock %}
+{% block content %}
+  <h1>{{ day.date_human }}</h1>
+  <p class="day-meta">
+    {{ day.paper_count }} papers announced on arXiv
+    ({{ day.categories | join(", ") }})
+    {%- if prev_date or next_date %} ·
+      {% if prev_date %}<a href="{{ root }}archive/{{ prev_date }}.html">&larr; {{ prev_date }}</a>{% endif %}
+      {% if next_date %}<a href="{{ root }}archive/{{ next_date }}.html">{{ next_date }} &rarr;</a>{% endif %}
+    {%- endif %}
+  </p>
+
+  {% if highlights %}
+  <section class="highlights">
+    <h2>Highlights</h2>
+    {% for paper in highlights %}
+    <article class="paper highlight">
+      <h3><a href="{{ paper.link }}">{{ paper.title }}</a></h3>
+      <p class="paper-meta">
+        {{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}
+        {% if paper.hf_upvotes %}<span class="badge">HF community pick</span>{% endif %}
+      </p>
+      <p>{{ paper.highlight_summary or paper.summary }}</p>
+    </article>
+    {% endfor %}
+  </section>
+  {% endif %}
+
+  {% for topic, papers in topics %}
+  <section class="topic">
+    <h2 id="{{ topic }}">{{ topic_labels.get(topic, topic) }} <span class="count">({{ papers | length }})</span></h2>
+    {% for paper in papers %}
+    <article class="paper">
+      <h3><a href="{{ paper.link }}">{{ paper.title }}</a></h3>
+      <p class="paper-meta">
+        {{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}
+        · <span class="arxiv-id">arXiv:{{ paper.id }}</span>
+        {% if paper.announce_type == "cross" %}<span class="badge badge-cross">cross-listed</span>{% endif %}
+      </p>
+      {% if paper.summary %}
+      <p>{{ paper.summary }}</p>
+      {% else %}
+      <p class="no-summary">No summary available — see the <a href="{{ paper.link }}">abstract on arXiv</a>.</p>
+      {% endif %}
+    </article>
+    {% endfor %}
+  </section>
+  {% endfor %}
+{% endblock %}

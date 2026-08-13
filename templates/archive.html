@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Archive — AI Paper Digest{% endblock %}
+{% block content %}
+  <h1>Archive</h1>
+  <ul class="archive-list">
+    {% for day in days %}
+    <li>
+      <a href="{{ root }}archive/{{ day.date }}.html">{{ day.date_human }}</a>
+      <span class="count">{{ day.paper_count }} papers</span>
+    </li>
+    {% endfor %}
+  </ul>
+{% endblock %}

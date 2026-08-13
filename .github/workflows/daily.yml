@@ -1,0 +1,87 @@
+name: Daily digest (API mode)
+
+# Cloud alternative to the launchd/subscription mode: runs the pipeline on the
+# Claude API (pay per token). Skips cleanly when no ANTHROPIC_API_KEY secret is
+# configured, so this workflow is inert unless you opt into API mode.
+#
+# Note: pushes made with the default GITHUB_TOKEN do not trigger deploy.yml,
+# so this workflow renders and deploys Pages itself.
+
+on:
+  schedule:
+    # Mon-Fri 06:30 UTC, after arXiv's midnight-ET feed refresh. arXiv makes
+    # no announcements on weekends; the pipeline exits cleanly on empty feeds.
+    - cron: "30 6 * * 1-5"
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: daily-digest
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    outputs:
+      ran: ${{ steps.creds.outputs.present }}
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+    steps:
+      - id: creds
+        run: |
+          if [ -n "$ANTHROPIC_API_KEY" ]; then
+            echo "present=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "present=false" >> "$GITHUB_OUTPUT"
+            echo "No ANTHROPIC_API_KEY secret configured — skipping API-mode run." \
+                 "Use the launchd/subscription mode instead (see README)."
+          fi
+
+      - if: steps.creds.outputs.present == 'true'
+        uses: actions/checkout@v4
+
+      - if: steps.creds.outputs.present == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - if: steps.creds.outputs.present == 'true'
+        run: pip install -r requirements.txt
+
+      - if: steps.creds.outputs.present == 'true'
+        name: Run pipeline
+        run: python -m digest.pipeline --engine api
+
+      - if: steps.creds.outputs.present == 'true'
+        name: Commit data
+        run: |
+          git config user.name "digest-bot"
+          git config user.email "digest-bot@users.noreply.github.com"
+          git add data/
+          git diff --cached --quiet || { git commit -m "digest: $(date -u +%F)"; git push; }
+
+      - if: steps.creds.outputs.present == 'true'
+        run: python -m digest.render
+
+      - if: steps.creds.outputs.present == 'true'
+        uses: actions/configure-pages@v5
+
+      - if: steps.creds.outputs.present == 'true'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  deploy:
+    needs: digest
+    if: needs.digest.outputs.ran == 'true'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

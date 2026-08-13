@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}AI Paper Digest{% endblock %}</title>
+  <meta name="description" content="A daily, machine-summarized digest of new AI research papers from arXiv.">
+  <link rel="stylesheet" href="{{ root }}style.css">
+  <link rel="alternate" type="application/rss+xml" title="AI Paper Digest" href="{{ root }}feed.xml">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-title" href="{{ root }}index.html">AI Paper Digest</a>
+    <nav>
+      <a href="{{ root }}archive.html">Archive</a>
+      <a href="{{ root }}feed.xml">RSS</a>
+    </nav>
+  </header>
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+  <footer class="site-footer">
+    <p>Summaries are AI-generated and may contain errors; the linked paper is authoritative.
+       Paper metadata comes from <a href="https://arxiv.org">arXiv</a> —
+       thank you to arXiv for use of its open access interoperability.</p>
+  </footer>
+</body>
+</html>
