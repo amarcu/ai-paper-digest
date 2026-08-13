@@ -80,6 +80,10 @@ def _summary_blocks(text: str) -> list[dict]:
             blocks[-1]["items"].append(line[2:].strip())
         else:
             blocks.append({"kind": "p", "text": line})
+    # Drop a leaked conversational preamble ("Here's the digest treatment:").
+    if len(blocks) > 1 and blocks[0]["kind"] == "p" \
+            and len(blocks[0]["text"]) < 60 and blocks[0]["text"].endswith(":"):
+        blocks = blocks[1:]
     if len(blocks) == 1 and blocks[0]["kind"] == "p":
         sentences = _SENTENCE_SPLIT.split(blocks[0]["text"])
         if len(sentences) > 2:

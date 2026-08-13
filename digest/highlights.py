@@ -38,7 +38,9 @@ DEEP_PROMPT = (
     "point — how the method works, the main results with concrete numbers where given, "
     "and notable limitations. Use light inline Markdown — **bold** for headline results "
     "and key numbers, `backticks` for model, method, and dataset names — but no headers, "
-    "links, or nested lists. Do not repeat the title, do not open with 'This paper'.\n\n"
+    "links, or nested lists. Do not repeat the title, do not open with 'This paper'. "
+    "Output the treatment only — no preamble like 'Here is the summary' and no closing "
+    "remarks.\n\n"
     "Title: {title}\n\n{body}"
 )
 
