@@ -36,8 +36,8 @@ static site (with its own RSS feed) deployed to GitHub Pages.
 
 ## Two ways to run it daily
 
-**Subscription mode (recommended, no API cost).** This Mac runs the pipeline
-via launchd using headless Claude Code, pushes the day's `data/` commit, and
+**Subscription mode (recommended, no API cost).** A Mac with Claude Code
+signed in runs the pipeline via launchd, pushes the day's `data/` commit, and
 `deploy.yml` renders + publishes Pages on push (rendering needs no key):
 
 ```sh
@@ -45,10 +45,10 @@ cp scripts/com.amarcu.ai-paper-digest.plist ~/Library/LaunchAgents/
 launchctl load ~/Library/LaunchAgents/com.amarcu.ai-paper-digest.plist
 ```
 
-`scripts/run-daily.sh` follows the launchd-runtime conventions: it reads
-`CLAUDE_CODE_OAUTH_TOKEN` (headless auth) and `TELEGRAM_BOT_TOKEN` /
-`TELEGRAM_CHAT_ID` (failure notifications) from the `env` block of
-`~/.claude/settings.json`. Logs go to `~/Library/Logs/ai-paper-digest.log`.
+`scripts/run-daily.sh` reads `CLAUDE_CODE_OAUTH_TOKEN` (headless auth) and,
+optionally, `TELEGRAM_BOT_TOKEN` / `TELEGRAM_CHAT_ID` (failure notifications)
+from the `env` block of `~/.claude/settings.json`. Logs go to
+`~/Library/Logs/ai-paper-digest.log`.
 
 **API mode (cloud, machine-independent).** Add an `ANTHROPIC_API_KEY`
 repository secret and `daily.yml` runs the whole thing on a GitHub Actions
@@ -86,13 +86,7 @@ Useful flags: `--categories cs.AI,cs.LG,cs.CL`, `--no-cross`, `--limit N`,
 - Summaries are machine-generated and may contain errors; the linked paper is
   authoritative.
 
-## Status
+## Ideas
 
-- **Milestone 1 (done):** fetch + dedupe + summarization (both engines) →
-  daily JSON.
-- **Milestone 2 (done):** static site — daily page, archive, digest RSS feed,
-  Pages deploy workflows.
-- **Milestone 3 (done):** highlights with HF cross-reference and full-text
-  deep summaries; Telegram failure notifications in the launchd wrapper.
-- Possible next: search across days, per-topic RSS feeds, newsletter/Telegram
-  channel mirror of the highlights.
+Search across days, per-topic RSS feeds, and a newsletter or Telegram channel
+mirror of the highlights.
