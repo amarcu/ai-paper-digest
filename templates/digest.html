@@ -35,7 +35,7 @@
             <span class="authors">{{ paper.authors[:6] | join(", ") }}{% if paper.authors | length > 6 %} et al.{% endif %}</span>
           </span>
           {% if paper.summary %}
-          <span class="paper-summary">{{ paper.summary }}</span>
+          <span class="paper-summary">{{ paper.summary | md }}</span>
           {% endif %}
         </summary>
         <div class="paper-more">
@@ -43,11 +43,11 @@
           {% if block.kind == "ul" %}
           <ul>
             {% for item in block["items"] %}
-            <li>{{ item }}</li>
+            <li>{{ item | md }}</li>
             {% endfor %}
           </ul>
           {% else %}
-          <p>{{ block.text }}</p>
+          <p>{{ block.text | md }}</p>
           {% endif %}
           {% endfor %}
           <p class="paper-links">
@@ -74,7 +74,7 @@
             {% if paper.announce_type == "cross" %}<span class="tag">cross-listed</span>{% endif %}
           </span>
           {% if paper.summary %}
-          <span class="paper-summary">{{ paper.summary }}</span>
+          <span class="paper-summary">{{ paper.summary | md }}</span>
           {% else %}
           <span class="paper-summary no-summary">No summary available — see the abstract on arXiv.</span>
           {% endif %}

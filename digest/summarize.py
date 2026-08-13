@@ -36,6 +36,9 @@ SYSTEM_PROMPT = (
     "key findings or claims. Write for a technical reader who has not seen the paper: "
     "spell out acronyms on first use where the abstract defines them, do not repeat the "
     "title, do not open with 'This paper', and do not editorialize about importance. "
+    "Within the summary use light inline Markdown: wrap the single most important "
+    "finding or number in **bold**, and put names of models, methods, datasets, and "
+    "benchmarks in `backticks`; no links, headers, or bullet lists. "
     "Also assign the single best-fitting topic tag."
 )
 

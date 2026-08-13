@@ -23,7 +23,10 @@ CHUNK_INSTRUCTIONS = (
     "problem the paper tackles, the approach it takes, and the key findings or claims. "
     "Write for a technical reader who has not seen the paper: spell out acronyms on "
     "first use where the abstract defines them, do not repeat the title, do not open "
-    "with 'This paper', and do not editorialize about importance. Also assign each "
+    "with 'This paper', and do not editorialize about importance. Within each summary "
+    "use light inline Markdown: wrap the single most important finding or number in "
+    "**bold**, and put names of models, methods, datasets, and benchmarks in "
+    "`backticks`. No links, headers, or bullet lists inside summaries. Also assign each "
     f"paper the single best-fitting topic tag from: {', '.join(TOPICS)}.\n\n"
     "Output ONLY a JSON array with one object per paper, in the form "
     '{"id": "<paper id>", "summary": "<2-4 sentences>", "topic": "<tag>"}. '

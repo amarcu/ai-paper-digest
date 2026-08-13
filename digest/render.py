@@ -20,6 +20,7 @@ from email.utils import format_datetime
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
+from markupsafe import Markup, escape
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 DEFAULT_BASE_URL = "https://amarcu.github.io/ai-paper-digest/"
@@ -45,6 +46,23 @@ def _human_date(iso_date: str) -> str:
 
 
 _SENTENCE_SPLIT = re.compile(r"(?<=[.!?])\s+(?=[A-Z0-9\"(])")
+
+_MD_CODE = re.compile(r"`([^`]+)`")
+_MD_BOLD = re.compile(r"\*\*([^*]+)\*\*")
+_MD_EM = re.compile(r"(?<!\*)\*([^*\s][^*]*)\*(?!\*)")
+
+
+def _md_inline(text: str | None) -> Markup:
+    """Render the light inline Markdown the summarizers emit (bold, code,
+    emphasis) — everything else is escaped, so stray HTML in a summary can
+    never reach the page."""
+    if not text:
+        return Markup("")
+    html = str(escape(text))
+    html = _MD_CODE.sub(r"<code>\1</code>", html)
+    html = _MD_BOLD.sub(r"<strong>\1</strong>", html)
+    html = _MD_EM.sub(r"<em>\1</em>", html)
+    return Markup(html)
 
 
 def _summary_blocks(text: str) -> list[dict]:
@@ -109,6 +127,7 @@ def render_site(data_dir: Path, out_dir: Path, base_url: str) -> int:
         trim_blocks=True,
         lstrip_blocks=True,
     )
+    env.filters["md"] = _md_inline
     digest_template = env.get_template("digest.html")
     archive_template = env.get_template("archive.html")
     feed_template = env.get_template("feed.xml")

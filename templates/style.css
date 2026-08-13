@@ -266,6 +266,16 @@ section h2 .count {
 }
 .paper-more li { margin: 0 0 0.45rem; }
 .paper-more li::marker { color: var(--accent); }
+
+/* Inline markdown inside summaries */
+.paper strong { font-weight: 600; }
+.paper code {
+  font-family: var(--mono);
+  font-size: 0.82em;
+  background: color-mix(in srgb, var(--line) 55%, transparent);
+  border-radius: 3px;
+  padding: 0.04em 0.28em;
+}
 .paper-links {
   display: flex;
   gap: 1.2rem;

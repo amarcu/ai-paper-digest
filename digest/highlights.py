@@ -36,8 +36,9 @@ DEEP_PROMPT = (
     "plain text: first a one-to-two sentence overview of the problem and the core idea, "
     "then 3-5 bullet lines each starting with '- ', each a single sentence covering one "
     "point — how the method works, the main results with concrete numbers where given, "
-    "and notable limitations. No markdown besides the '- ' bullets, do not repeat the "
-    "title, do not open with 'This paper'.\n\n"
+    "and notable limitations. Use light inline Markdown — **bold** for headline results "
+    "and key numbers, `backticks` for model, method, and dataset names — but no headers, "
+    "links, or nested lists. Do not repeat the title, do not open with 'This paper'.\n\n"
     "Title: {title}\n\n{body}"
 )
 
