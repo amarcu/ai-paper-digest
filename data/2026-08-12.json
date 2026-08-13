@@ -1,6 +1,6 @@
 {
   "date": "2026-08-12",
-  "generated_at": "2026-08-13T22:13:34+00:00",
+  "generated_at": "2026-08-13T22:25:35+00:00",
   "categories": [
     "cs.AI",
     "cs.LG",
@@ -29,8 +29,9 @@
       "announce_type": "cross",
       "feed_category": "cs.LG",
       "announced": "2026-08-12",
-      "summary": "Wasserstein (optimal transport) distances are increasingly used to compare images, but their behavior under noise has lacked theoretical grounding. Treating images as discrete measures on the pixel grid, the authors derive finite-sample expectation bounds under pixel-wise additive Gaussian noise, proving that **the error in the signed 2-Wasserstein discrepancy grows with the square root of the noise standard deviation**, versus linear growth for the Euclidean metric. Experiments support the bounds, reveal a counterintuitive case where adding noise can decrease the Wasserstein distance, and a cryo-electron microscopy case study shows the metric capturing data-manifold geometry at noise levels where the Euclidean metric fails.",
-      "topic": "theory"
+      "summary": "Wasserstein (optimal transport) distances are increasingly used to compare images, but their behavior under pixel-wise additive noise has lacked theoretical grounding. Treating images as discrete measures on the pixel grid, the authors derive finite-sample expectation bounds under a Gaussian noise model, proving that **the error in the signed `2-Wasserstein` discrepancy scales with the square root of the noise standard deviation**, versus linear scaling for the Euclidean metric. Experiments support the bounds, uncover a counterintuitive effect where adding noise can decrease the Wasserstein distance, and a cryo-electron microscopy case study shows the metric capturing data-manifold geometry at noise levels where the Euclidean metric fails.",
+      "topic": "theory",
+      "interest": 3
     },
     {
       "id": "2606.15237",
@@ -49,8 +50,9 @@
       "announce_type": "cross",
       "feed_category": "cs.LG",
       "announced": "2026-08-12",
-      "summary": "Ensemble classifiers such as random forests gain accuracy from using more base models but pay for it in computation. Borrowing from sequential testing, the authors evaluate base models one at a time and stop as soon as a clear majority emerges, formalizing three notions of optimality for early stopping and showing that the optimal strategy for each can be found efficiently by solving a linear program. On datasets from the `UCI Machine Learning Repository` and the `Grinsztajn et al.` tabular benchmarks, the approach delivers **speed-ups of 4x or more while keeping disagreement with the full ensemble to 0.1%**.",
-      "topic": "theory"
+      "summary": "Ensemble classifiers such as random forests gain accuracy by combining many base models, but evaluating every base model at prediction time is costly. Borrowing from sequential testing, the method evaluates base models one at a time and halts once a clear majority emerges, formalizing three notions of optimal early stopping that each reduce to an efficiently solvable linear program constrained by an allowable disagreement rate with the full ensemble. On datasets from the `UC Irvine Machine Learning Repository` and the `Grinsztajn et al.` tabular benchmarks, the optimal strategies deliver **speed-ups of 4x or more while holding disagreement to 0.1%**.",
+      "topic": "theory",
+      "interest": 3
     },
     {
       "id": "2608.05235",
@@ -82,8 +84,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Research agents that run multi-round machine-learning experiments in industrial recommendation settings retain trajectories to guide later decisions, but a completed trajectory is not automatically evidence: artifacts may be unsupported, rounds invalid or confounded, and earlier findings obscured by later changes. The proposed evidence-grounded framework couples a context-isolated generate-verify-repair check on consequential artifacts with post-execution validity and attribution analysis that qualifies claims as actionable repairs, diagnostic guards, or withheld findings, preserving admitted claims as auditable records that a hybrid LLM-assisted controller then applies, defers, or rejects. Audits expose non-monotonic trajectory evolution, with final rounds frequently underperforming an earlier best, and **candidates produced through the complete workflow yielded positive online lifts over deployed baselines**.",
-      "topic": "agents"
+      "summary": "Research agents that run multi-round machine-learning experiments in industrial recommendation systems retain trajectories to guide later decisions, but those trajectories can contain unsupported artifacts, invalid or confounded rounds, and findings obscured by later edits. The proposed framework converts trajectories into evidence through a context-isolated generate-verify-repair loop that checks artifacts before release, followed by post-execution validity and attribution checks that qualify each claim as an actionable repair, a diagnostic guard, or a withheld finding, preserved as auditable records with explicit provenance; an LLM-assisted controller then applies, defers, or rejects records against new targets. Audits expose **non-monotonic trajectory evolution, with final rounds frequently underperforming an earlier best**, and candidates from the full workflow achieved positive online lifts over deployed baselines.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.06578",
@@ -101,8 +104,9 @@
       "announce_type": "cross",
       "feed_category": "cs.LG",
       "announced": "2026-08-12",
-      "summary": "Whether distinct training pipelines make frontier language models behave measurably differently under explicit steering instructions is tested across six models from six developers, using 300 paired base and steered items spanning values-conflict, reasoning-elicitation, and reasoning-suppression categories, with all six models acting as blind peer judges scored by leave-one-out consensus. Models differ not only in how much steering shifts their behavior but in the kind of response mode they adopt: `GPT-5` deflects requests to disclose its reasoning while leaving its answer intact (99% versus 0% for all other models), and `Claude Opus 4.7` and `GPT-5` resist suppression instructions in different ways. Tracing the largest behavioral split into `Llama`, a linear probe decodes the behavior from the residual stream at 0.87 held-out accuracy, and **injecting that direction during generation drives the behavior from 0% to 86%**.",
-      "topic": "safety-and-alignment"
+      "summary": "Frontier language models are trained with different data, objectives, and safety pipelines, but whether this yields measurably different behavior under explicit steering has been underexplored. Six frontier models from six developers are evaluated on 300 paired base and steered prompts spanning values conflicts, reasoning elicitation, and reasoning suppression, with all six models acting as blind peer judges and 24,480 judgments scored by leave-one-out consensus. Models differ not just in how much steering shifts behavior but in the kind of response they produce: **`GPT-5` deflects requests to disclose its reasoning while leaving answers intact 99% of the time, versus 0% for every other model**, and `Claude Opus 4.7` and `GPT-5` resist suppression instructions in distinct ways. Using `Llama` as the open-weight model, a linear probe decodes the largest behavioral split from the residual stream at 0.87 held-out accuracy, and injecting that direction during generation drives the behavior from 0% to 86%.",
+      "topic": "safety-and-alignment",
+      "interest": 3
     },
     {
       "id": "2608.06926",
@@ -124,8 +128,9 @@
       "announce_type": "cross",
       "feed_category": "cs.CL",
       "announced": "2026-08-12",
-      "summary": "Designing autonomous agents that assist human teams requires understanding team dynamics without task-specific knowledge, so the authors cluster teams into performance-predictive behavioral tribes based on communication patterns alone. Across four diverse datasets, the `TRIBE` approach predicts team performance **as early as 10% into a task**, with prediction strength varying by how much behavioral freedom the task structure allows. Temporal analysis shows that AI agents significantly alter team behavioral trajectories while human advisors align with natural dynamics, and an optimized pipeline achieves significant speedup with better performance than a `Llama` baseline.",
-      "topic": "applications"
+      "summary": "Autonomous agents that assist human teams need to understand team dynamics, often without task-specific knowledge. The domain-independent approach groups teams into performance-predictive behavioral tribes based on their communication patterns, and across four diverse datasets these patterns **predict team performance as early as 10% into a task**, with predictive strength varying by how much behavioral freedom the task structure allows. Temporal analysis shows AI agents significantly alter team behavioral trajectories while human advisors align with natural dynamics, and an optimized pipeline achieves significant speedup with improved performance compared to a `Llama` baseline.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07070",
@@ -146,8 +151,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "AI-driven misinformation is modeled as a strategic interaction among a government regulator, an AI enterprise, and users through a three-party evolutionary game with heterogeneous rewards and punishments, analyzing stability via the replicator equations. The analysis finds that neither unilateral regulation nor market incentives alone can curb misinformation: **an evolutionarily stable regime of truthful information production emerges only when regulatory rewards and punishments, enterprise reputation loss, and user adoption incentives jointly surpass critical thresholds**. The results argue for coordinated, adaptive policy mixes that align regulatory instruments with enterprise behavior and user uptake while managing governance costs.",
-      "topic": "safety-and-alignment"
+      "summary": "AI-generated misinformation is spreading faster than governance mechanisms can contain it, eroding information credibility and social trust. The study models strategic interdependence among a government regulator, an AI enterprise, and users as a three-party evolutionary game with heterogeneous rewards and punishments, deriving evolutionary stability conditions from the replicator equations. The analysis concludes that **neither unilateral regulation nor market incentives alone can curb misinformation**: a stable regime of real-information production emerges only when regulatory rewards and punishments, enterprise reputation loss, and user adoption incentives jointly exceed critical thresholds, arguing for coordinated, adaptive policy mixes.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.07471",
@@ -171,8 +177,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Bank fraud became more common during the COVID-19 pandemic as operations moved online, motivating machine-learning approaches to recognizing fraudulent banking transactions. The study develops detection models along with preprocessing techniques for highly imbalanced data, feature transformation, and feature engineering, and compares multiple algorithms including an artificial neural network. Among individual methods, `logistic regression` performs best with an AUC (area under the curve) of about 0.946, while **stacked generalization improves the AUC to 0.954**.",
-      "topic": "applications"
+      "summary": "Bank fraud grew during the COVID-19 pandemic as operations moved online and charitable funds proliferated as vehicles for deception. The study develops machine learning models for identifying fraudulent banking transactions, comparing data preprocessing techniques including handling of highly imbalanced datasets, feature transformation, and feature engineering. Among individual algorithms, `logistic regression` performs best with an AUC of about 0.946, while **stacked generalization raises the AUC to 0.954**.",
+      "topic": "applications",
+      "interest": 1
     },
     {
       "id": "2608.07473",
@@ -193,8 +200,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Evaluative Artificial Intelligence (EAI) supports human decision-making by presenting competing hypotheses with evidence for and against each, rather than issuing a single recommendation. In a position paper, the authors argue that **computational argumentation offers a formal, computable foundation for evaluative AI systems that are explainable and contestable**, and lay out a long-term research agenda toward distributed, human-centred implementations of the paradigm.",
-      "topic": "reasoning"
+      "summary": "Evaluative Artificial Intelligence (EAI) is a recently proposed style of decision support that presents competing hypotheses along with evidence for and against each, instead of issuing a single recommendation. The authors argue that computational argumentation is a particularly suitable formalism for this role, providing **a formal, computable foundation for EAI systems that are explainable and contestable**, and they lay out a long-term research agenda toward distributed, human-centred EAI.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.07474",
@@ -211,8 +219,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Prior work argued human-in-the-loop oversight collapses in high-loss domains when AI output velocity exceeds human cognitive capacity; here the constraint is refined to velocity times per-item cognitive load, and the authors argue capability improvements restructure that load rather than reduce it, since triage and response costs do not fall with model accuracy. The proposed `Flow-by-Flow` paradigm governs AI output without judging its content, combining a cognitive-cost score over formal countable features that imposes nonlinear costs on high-volume production with an institutional capacity cap, and derives four design invariants for any content-judgment-bypass pathway. An illustrative Monte Carlo analysis over 1,000 parameter draws suggests composite multi-metric flow control **outperforms supervision reinforcement alone in 90.8% of trials**.",
-      "topic": "safety-and-alignment"
+      "summary": "Prior work argued that human oversight of AI output collapses in high-loss domains when output velocity exceeds human cognitive capacity; the authors refine this to velocity times per-item cognitive load, showing that capability improvements restructure that load rather than reduce it, since triage and response costs do not fall as models improve. Their proposed governance paradigm controls supervisory load without evaluating content: a cognitive cost score built from formal, countable features imposes nonlinear costs on high-volume production under an institutional capacity cap, satisfying four design invariants including no content judgment and no batch clearance. **An illustrative Monte Carlo analysis across 1,000 parameter draws finds composite multi-metric flow control outperforms supervision reinforcement alone in 90.8% of trials.**",
+      "topic": "safety-and-alignment",
+      "interest": 2
     },
     {
       "id": "2608.07475",
@@ -232,8 +241,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Generative Artificial Intelligence (GenAI) creates a governance dilemma for STEM assessment: unrestricted access enables task outsourcing that undermines validity, while blanket bans are hard to enforce and leave students unprepared for AI-supported workplaces. Grounded in Evidence Centered Design (ECD), the framework provides **decision rules linking target constructs, evidence requirements, and task characteristics to one of three governance regimes: restrict, scaffold, or require GenAI use**. Restriction is warranted for foundational knowledge and routine skills, scaffolding when bounded support reduces peripheral demands, and required use when the construct itself involves human-AI collaboration, illustrated with introductory physics tasks.",
-      "topic": "applications"
+      "summary": "Generative Artificial Intelligence (GenAI) poses a governance dilemma for STEM assessment: unrestricted access enables task outsourcing that undermines validity, while blanket bans are unenforceable and leave students unprepared for AI-supported workplaces. The proposed student-focused framework, grounded in Evidence-Centered Design (ECD), supplies decision rules linking target constructs, evidence requirements, and task characteristics to three governance regimes: **restrict GenAI when it threatens evidence of unaided proficiency, scaffold it when bounded support preserves interpretability, and require it when human-AI collaboration is itself the construct being assessed**. Examples from introductory physics illustrate task design under each policy.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07476",
@@ -250,8 +260,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Structure theories, defined as triples of a signature, axioms, and an inference policy, can admit many globally consistent interpretations, raising the question of when a single canonical one can be constructed. The framework distinguishes three levels of canonicalization (closure stabilization, global completion, and determinization), classifies non-determinism into epistemic plurality (Type E) and structural plurality (Type S), and gives sufficient conditions under which operator-based completion or selector-based construction succeeds. Key results include **determinization via canonical selection for Type S-strong theories** and a conditional classification theorem reducing theory-intrinsic mechanisms to closure or selection, with an application framing LLM hallucination as unsupported canonicalization.",
-      "topic": "theory"
+      "summary": "The work develops a formal framework for extracting canonical interpretations from structure theories — triples of signature, axioms, and inference policy — whose admissible interpretations may be plural rather than unique. It distinguishes three levels of canonicalization (closure stabilization, global completion, and determinization), classifies non-determinism into epistemic and structural plurality, and analyzes two canonicalization mechanisms, operator-based completion and selector-based construction, with sufficient conditions for each. **Determinization is achieved for the strongly structural class via canonical selection**, while full determinization for epistemic theories rests on an open global confluence property; the authors also suggest viewing LLM hallucination as unsupported canonicalization.",
+      "topic": "theory",
+      "interest": 1
     },
     {
       "id": "2608.07477",
@@ -268,8 +279,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Automated Machine Learning (AutoML) tools bring efficiency to hiring pipelines, but when trained on biased historical data they risk discriminatory outcomes that non-expert business users cannot detect or mitigate. Using qualitative Human-Computer Interaction (HCI) audits and quantitative testing of eight AutoML platforms on human-resources datasets, guided by frameworks such as the Technology Acceptance Model and Cognitive Load Theory, the study finds **widespread deficiencies in transparency, user control, and bias-mitigation support** across the platforms. It proposes a five-dimensional HCI-based fairness evaluation framework and recommends embedding fairness directly into AutoML product design.",
-      "topic": "applications"
+      "summary": "Automated Machine Learning (AutoML) tools used in hiring can reproduce discrimination present in biased historical data, and non-expert business users typically cannot detect or mitigate that bias. Combining qualitative Human-Computer Interaction (HCI) audits with quantitative testing of **eight AutoML platforms on human-resources datasets**, and drawing on frameworks such as the Technology Acceptance Model and Cognitive Load Theory, the thesis finds widespread deficiencies in transparency, user control, and bias mitigation support. It proposes a five-dimensional HCI-based fairness evaluation framework and recommends embedding fairness directly into AutoML product design.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07480",
@@ -293,8 +305,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Active inference models of human driving have so far omitted affective state, a significant influence on decision-making in traffic. The proposed formulation extends valence and arousal from the circumplex model of emotion, previously confined to simplified discrete-state agents, to a continuous-state active inference driving model, conditioning affect estimates on predicted future outcomes as well as the current state. In two interactive driving scenarios, **the resulting emotion signals correspond to affective patterns reported by humans in similar situations**.",
-      "topic": "other"
+      "summary": "Active inference models of human driving have so far ignored affective state, a significant determinant of behavior in traffic. The authors extend valence and arousal representations from the circumplex model of emotion — previously limited to simplified discrete-state settings — to a continuous-state active inference driving model, conditioning affective estimates on both the current state and predicted future outcomes. In two interactive driving scenarios, **the extracted emotion signals correspond to affective patterns reported by humans in similar situations**.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07481",
@@ -312,8 +325,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Whether one large language model can approximate another's humor preferences is tested in a controlled `Cards Against Humanity`-style task, with `GPT-4o` as the judging Czar and `Claude Opus-4.5` as the Player on 244 hands where the two models hold deterministic but opposite preferences, so success cannot come from self-preference. Across five graded conditions, Player accuracy rises from 0.7% by default, to 19.0-25.9% from framing instructions alone, and to **72.8% and 82.3% once the Czar's prior choices and rationales are provided**, with every step significant under Cochran's Q and McNemar tests. The authors interpret this as theory-of-mind-like behavior in an operational sense: the Player shifts from its own preferences toward another agent's demonstrated ones, without claims about underlying mental-state representations.",
-      "topic": "llms"
+      "summary": "Can one large language model learn another model's humor preferences rather than projecting its own? In a Cards Against Humanity-style task with `GPT-4o` as judge and `Claude Opus-4.5` as player, a stability procedure isolates 244 hands where the two models hold deterministic but opposite preferences, and the player is tested across five conditions ranging from no information about the judge to seeing its prior choices with rationales. Accuracy rises from 0.7% under default self-preference to 19-26% with framing-only instructions, and to **82.3% once the judge's prior selections and rationales are provided**, indicating that behavioral evidence rather than role instruction drives this operational, theory-of-mind-like adaptation.",
+      "topic": "llms",
+      "interest": 2
     },
     {
       "id": "2608.07490",
@@ -334,8 +348,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Game benchmarks for language agents mostly score final outcomes, overlooking how gameplay experience changes decision-making across repeated play. The study formalizes experience-sensitive game learning, introduces a suite of interactive games with reusable strategic structure along with greedy-to-global metrics and behavioral diagnostics computed from action traces, and evaluates human players and recent self-evolving language agents in the same behavioral metric space. **Humans show interpretable, relatively stable shifts from locally greedy heuristics toward global strategies, while self-evolving agents show noisy and transient gains**, suggesting current self-evolution methods struggle to convert experience into durable behavioral change.",
-      "topic": "agents"
+      "summary": "Game benchmarks for language agents mostly score final outcomes, revealing little about how players learn from repeated interaction. The study formulates experience-sensitive game learning as a framework for analyzing behavioral change across repeated play, introducing a suite of interactive games with reusable strategic structure, cross-game greedy-to-global metrics, and behavioral diagnostics computed from action traces, applied to both human players and recent self-evolving language agents. **Humans show interpretable, stable shifts from locally greedy heuristics toward global strategies, while self-evolving agents show noisy and transient gains**, suggesting current self-evolution methods struggle to convert gameplay experience into durable changes in decision-making.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.07494",
@@ -356,8 +371,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Writing effective prompts for Large Language Models (LLMs) is a systematic, skillful process that challenges even experienced users, despite appearing accessible. In contrast to surveys centered on technical principles and application scenarios, this one examines prompt principles, taxonomy, and organization from a user-centered perspective, contributing **an intuitive evaluation strategy for prompt efficacy**, workflow demonstrations on representative applications, and a continuously updated open-source companion project. The aim is to lower the barrier for users to craft prompts that fit evolving real-world tasks.",
-      "topic": "llms"
+      "summary": "Although prompting large language models looks accessible, organizing genuinely effective prompts is a systematic, skillful process that challenges even experienced users. Unlike surveys focused on the technical principles of Large Language Models (LLMs), this one examines prompt principles, taxonomy, and organization from the user's perspective, contributing **an intuitive strategy for evaluating prompt efficacy, workflow demonstrations on representative applications, and a dynamically updated open-source project** intended to keep the guidance current as applications evolve.",
+      "topic": "llms",
+      "interest": 2
     },
     {
       "id": "2608.07495",
@@ -379,8 +395,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Large language model (LLM)-based patient simulators offer scalable communication training for palliative care, but most treat patient emotion as static, missing the dynamic emotional shifts of real clinical interactions. The system introduces an `Emotion Director` agent that estimates the simulated patient's emotional state and generates turn-level control signals for emotional intensity, regulatory stability, and interactional guidance. In controlled multi-turn physician-patient dialogue simulations, it **improves on baseline simulators across four theory-informed emotional realism metrics** and stays robust across conversational personality variants.",
-      "topic": "applications"
+      "summary": "Large language model (LLM)-based patient simulators offer scalable communication training for clinicians, but most treat patient emotion as static, missing the dynamic emotional shifts of real palliative care conversations. The system adds an Emotion Director agent that estimates the simulated patient's emotional state and issues turn-level control signals governing emotional intensity, regulatory stability, and interactional guidance. In controlled multi-turn physician-patient dialogue simulations, it **outperforms baseline simulators on four theory-informed emotional realism metrics** and remains robust across conversational personality variants.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07498",
@@ -404,8 +421,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Persona-prompted large language models could stress-test recommender systems but also power synthetic agent swarms that threaten public discourse, so twelve LLM configurations are benchmarked on binary like/dislike prediction across 296 survey-based agent profiles and 26 ground-truth-mapped posts under three profile-completeness conditions. With full profiles, accuracy ranges from 75.54% to 96.68% depending chiefly on model choice; **`GPT-5.5 Pro` reaches 96.68% with a full profile but drops to 51% with demographics alone**, indistinguishable from the majority-class baseline, showing demographic inference carries negligible signal. Supervised classifiers collapse to 15.4% on held-out posts while LLMs sustain zero-shot generalization, and the least heterogeneous configuration homogenizes 34% of simulated population reactions.",
-      "topic": "agents"
+      "summary": "Whether persona-prompted large language models can reproduce individual users' social media reactions matters both for stress-testing recommender systems and for gauging the threat of synthetic agent swarms to public opinion. Twelve LLM configurations are benchmarked on binary like/dislike prediction across 296 survey-based agent profiles and 26 ground-truth-mapped posts at three levels of profile completeness, against leave-post-out machine-learning baselines. **`GPT-5.5 Pro` reaches 96.68% accuracy with full profiles but drops to chance level with demographics alone**, showing that demographic inference carries negligible signal, while supervised classifiers collapse to 15.4% on unseen posts where LLMs sustain zero-shot generalization. The least heterogeneous configuration also homogenizes 34% of simulated population reactions, underscoring both the validation and the risk.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.07499",
@@ -429,8 +447,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Benchmarking Large Language Model (LLM)-based Motivational Interviewing (MI) counsellors depends on simulated clients, but existing simulators are not aligned with core MI tasks such as evoking, in which the counsellor first elicits the client's ambivalence and then strengthens motivation for change. `Evoke-Sim` is a task-aware, multi-stage simulation framework for smoking-cessation counselling that combines structured client profiles, an evoking-specific three-stage conversation flow, and a reveal policy governing which profile information may be disclosed at each stage. Compared with existing profile-grounded simulated clients, it **better differentiates levels of MI counselling quality** while reducing non-grounded client statements and premature disclosure of client information.",
-      "topic": "applications"
+      "summary": "Development of Large Language Model (LLM)-based Motivational Interviewing (MI) counsellors increasingly relies on simulated clients, but existing simulators are not aligned with MI's core tasks — especially evoking, where the counsellor elicits a client's ambivalence and then strengthens motivation for change. `Evoke-Sim` targets that task in smoking cessation using structured client profiles, an evoking-specific three-stage conversation flow, and a reveal policy regulating which profile information can be disclosed at each stage. Compared with existing profile-grounded simulated clients, it **better differentiates levels of MI counselling quality** while reducing non-grounded client statements and premature disclosure of client information.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07500",
@@ -448,8 +467,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Research on human collaboration with generative AI (GenAI) yields conflicting findings, with gains in individual creativity alongside reduced collective diversity and uneven benefits across skill levels; the authors argue these reflect GenAI's core feature of abundance, which makes ideas, drafts, and recombinations plentiful without guaranteeing better outcomes. Drawing on Generativity Theory, they propose **generative fit, the match between a system's generative potential and a community's generative capacities, as the unifying mechanism** explaining when abundance produces productive creativity and when it backfires. The resulting conceptual framework maps abundance onto cognitive, social, and organizational factors of collective creativity and offers design implications for collaborative workflows.",
-      "topic": "other"
+      "summary": "Studies of human collaboration with generative AI report conflicting results: enhanced individual creativity alongside reduced collective diversity, with benefits unevenly distributed across skill levels. The authors argue these apparent contradictions stem from a core feature of generative AI — abundance of ideas, drafts, and recombinations — and, drawing on Generativity Theory, propose **generative fit, the match between a system's generative potential and a community's generative capacities, as the mechanism determining when abundance yields productive creativity and when it backfires**. Mapping abundance onto cognitive, social, and organizational factors of collective creativity, the conceptual framework offers design implications for collaborative human-AI workflows.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.07504",
@@ -472,8 +492,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Many constraints on innovation are cognitive and social in origin — rooted in how people generate ideas, evaluate novelty, and communicate through social systems — so generative AI's impact depends on which of these human bottlenecks it touches. The framework maps bottlenecks across ideation, screening and testing, preference measurement and consumer insight, and diffusion and market learning, arguing that **at each stage generative AI can alleviate some bottlenecks while deepening others**, and that predicting which requires understanding the mechanism behind each constraint. It also separates bottlenecks likely to narrow as AI capabilities improve from those rooted in enduring human limits, and discusses cross-cutting issues that challenge the traditional structure of the innovation pipeline.",
-      "topic": "applications"
+      "summary": "Argues that the main constraints on innovation are cognitive and social rather than technical, rooted in how people generate ideas, judge novelty, and communicate through social systems. The framework traces these human bottlenecks through four stages of the innovation process, from ideation and screening to preference measurement, diffusion, and market learning, and asks how generative AI acts on each one. The central claim is that **generative AI can deepen some bottlenecks while alleviating others at every stage**, so predicting its effect requires understanding the mechanism behind each constraint, and the authors distinguish bottlenecks likely to narrow with better models from those rooted in enduring human limits.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.07508",
@@ -493,8 +514,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Millions of people of faith already bring real decisions to large language models, and the pressing question is not what a model knows but what its counsel does to the person receiving it. `JaleesBench` measures whether an AI agent is a righteous companion — judged by the residue an exchange leaves on the user — using 140 two-turn scenarios drawn from the classical Islamic compilation `Riyad al-Salihin`, tested under six adversarial pressures and three framings and scored by two frontier judges against each scenario's own supporting texts. Across eight systems, generic frontier models are only middling companions out of the box, but **a one-page companionship guide lifts them from +0.28/+0.23 to +0.84–0.87, on par with a domain-tuned assistant**, and a single steadfastness instruction raised a deployed Islamic assistant from +0.48 to +0.84. Every system caves under relational pressure such as insistence and personal appeals, and the domain-tuned assistant's edge comes overwhelmingly from its retrieval-and-prompting layer rather than its base model.",
-      "topic": "applications"
+      "summary": "Millions of people bring real decisions in matters of faith to AI assistants, and existing evaluations measure what models know rather than what their counsel does to the person receiving it. The benchmark builds 140 two-turn scenarios from `Riyad al-Salihin`, a classical Islamic compilation organized by virtue, applies six adversarial pressures and three framings, and scores eight systems with two frontier judges against each scenario's supporting texts. Generic frontier models are middling companions out of the box, but **a one-page companionship guide lifts them from +0.28/+0.23 to +0.84–0.87, matching a domain-tuned assistant**, whose own advantage turns out to come almost entirely from its retrieval-and-prompting layer rather than its base model. Every system tested caves under relational pressure such as insistence and personal appeals, though a single steadfastness instruction derived from the benchmark's diagnosis substantially closes that gap in a deployed assistant.",
+      "topic": "safety-and-alignment",
+      "interest": 2
     },
     {
       "id": "2608.07509",
@@ -514,8 +536,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Large language models used as conversational tutors must choose when to scaffold reasoning, hint, give feedback, explain, or invite reflection, and existing prompting and training methods lack reliable inference-time control over these strategies. `PIVOT` learns preference-based intervention vectors for activation steering of frozen LLM tutors, using a seven-category taxonomy of tutor moves and a generate-label-optimise loop in which a human-validated LLM judge identifies target and confusable non-target moves to build preference pairs for multi-layer residual-stream steering. The learned directions control tutor moves on held-out and out-of-domain tutoring data while preserving relevance and fluency, can be scaled, transferred, and composed at inference time, and in a study with 30 teachers **73.3% of participants preferred steered conversations over neutral baseline interactions** using the same prompt.",
-      "topic": "llms"
+      "summary": "Good tutoring requires choosing among moves like scaffolding, hinting, giving feedback, or inviting reflection, but prompting and fine-tuning give little reliable inference-time control over which strategy a model uses. `PIVOT` learns preference-based steering vectors for frozen language-model tutors: a human-validated LLM judge labels generated responses against a seven-category tutor-move taxonomy, and the resulting preference pairs train multi-layer residual-stream interventions that can be scaled, transferred, and composed at inference time. The method controls tutor moves on held-out and out-of-domain data while preserving relevance and fluency, and **73.3% of 30 teachers in a user study preferred steered conversations** over baseline interactions using the same prompt.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07511",
@@ -540,8 +563,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Clinical uses of large language models — triaging patients, drafting reports, translating medical jargon — demand social as well as factual competence. Using extended dialogues from the `HELP-Med` dataset of 1,800 transcripts in which participants sought medical information from `GPT-4o`, `Llama 3`, and `Command R+`, two experts coded conversations for socio-communicative behaviours (non-hostility, sensitivity, structuring, non-intrusiveness) with the `IC-MD` instrument originally designed for medical-school admissions. The models were strong on non-hostility, mixed on sensitivity and non-intrusiveness, and **performed poorly on structuring**, leading to the conclusion that current LLMs lack the consistent socio-communicative skills needed for safe and effective use as healthcare advisors.",
-      "topic": "applications"
+      "summary": "Proposed clinical uses of large language models, such as triage or explaining medical jargon, demand social as well as factual competence, which is rarely evaluated directly. Two experts coded 1,800 conversation transcripts from the `HELP-Med` dataset, in which participants sought medical information from `GPT-4o`, `Llama 3`, and `Command R+`, using the `IC-MD` instrument originally built to assess interactional competence in medical school admissions. The models were consistently non-hostile, mixed on sensitivity and non-intrusiveness, and **performed poorly at structuring conversations**, leading the authors to conclude that current models lack the reliable socio-communicative skills needed for safe use as healthcare advisors.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07512",
@@ -563,8 +587,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Text-centered use of large language models for personality assessment in asynchronous video interviews overlooks non-verbal cues in the visual and audio channels, even though emotion-related signals carry social and affective evidence about candidates. The two-stage `EMMR` framework extracts emotion-related cues from multimodal interview data and incorporates them into a multimodal large language model's structured reasoning as auxiliary behavioral evidence. On the `OPVA` and `AVI-6` interview datasets, **the approach improves mean absolute error, mean squared error, and Pearson correlation over baselines**, with analysis showing that semantic descriptions of emotion cues help while their quality affects reliability.",
-      "topic": "multimodal"
+      "summary": "Text-only approaches to judging personality from asynchronous video interviews discard non-verbal cues in voice and video, even though such cues carry social and affective evidence about candidates. The two-stage `EMMR` framework first extracts emotion-related cues from the visual, audio, and text streams, then feeds them into a multimodal large language model as auxiliary evidence within a structured reasoning process for scoring personality traits. On the `OPVA` and `AVI-6` interview datasets, **the approach improves mean absolute error, mean squared error, and Pearson correlation over baselines**, with analysis showing that the quality of the semantic emotion descriptions affects reliability.",
+      "topic": "applications",
+      "interest": 1
     },
     {
       "id": "2608.07518",
@@ -585,8 +610,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Wearable studies produce dense day-level physiology, sleep, activity, and environmental streams but only episodic labels for affect and cognition, and how dense histories are mapped to sparse labels is usually an implicit preprocessing choice. Using almost a year of data from 82 adults in the Providemus study, three wave-level representations — within-wave levels, absolute drift between waves, and proportional drift — are compared across 21 affect and cognition outcomes with four regressors, evaluated under both leave-one-subject-out and leave-one-wave-out splits. **Affective states are best predicted by wave-to-wave absolute drift, while cognitive performance aligns with within-wave levels**, and distributional shape descriptors such as minima and kurtosis carry more signal than simple means or medians.",
-      "topic": "applications"
+      "summary": "Wearable sensors produce dense day-level physiology, sleep, and activity data, while affect and cognition are only labeled episodically in survey waves, and how to map one cadence onto the other is usually treated as an afterthought. Using nearly a year of data from 82 adults in the `Providemus` brain-health study, the authors compare three wave-level representations of the sensor history — within-wave levels, absolute drift between waves, and proportional drift — across 21 outcomes, four regressors, and both leave-one-subject-out and leave-one-wave-out evaluation. **Affective states are best predicted by wave-to-wave absolute drift, whereas cognitive performance aligns with within-wave levels**, and distributional shape descriptors like minima and kurtosis carry more signal than simple means, making temporal representation an explicit design choice rather than a preprocessing detail.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07520",
@@ -605,8 +631,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Routing every query from tens of millions of pilgrims at a mass gathering to a large language model is costly at scale, slow on emergency paths, prone to dangerous hallucination, and unusable when connectivity fails. The assistant, built for the Nashik Simhastha Kumbh Mela, inverts that default: an embedding-indexed semantic cache serves as the single retrieval primitive for intent routing, answer caching, offline lookups, and multi-agent retrieval, with **generative models invoked only when similarity-based retrieval cannot produce a correct answer**, and a custom three-tier agent architecture keeps decision paths inspectable. An analytical model of per-query economics and an account of where similarity suffices support the argument that for bounded, high-stakes, low-connectivity public-service domains a similarity-first, LLM-bounded design is architecturally more appropriate than an LLM-default one.",
-      "topic": "applications"
+      "summary": "Events like the Kumbh Mela concentrate tens of millions of pilgrims who generate repetitive, multilingual, and safety-critical information demand, a setting where routing every query to a large language model is costly, slow on emergency paths, hallucination-prone, and useless offline. The system inverts the usual design: an embedding-indexed semantic cache serves as the single retrieval primitive for intent routing, answer caching, offline lookups, and multi-agent retrieval, with **generative models invoked only when similarity-based retrieval cannot produce a correct answer**. A custom three-tier agent architecture keeps decision paths inspectable, and an analytical cost model argues that this similarity-first design is architecturally better suited to bounded, high-stakes, low-connectivity public-service domains than an LLM-default one.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07523",
@@ -627,8 +654,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Difficulty differences across parallel-class programming examinations undermine fair assessment, and the study repositions large language models from benchmark targets to auxiliary evidence for interpreting exam difficulty, triangulated with student performance, item exposure, online-judge process data, and teacher interpretation. When ten models solved an eight-problem final exam alongside 120 students, **AI pass rate correlated with student pass rate at Spearman rho = 0.866**, and a structured AI reviewer's difficulty ratings correlated with problem-level pass rates at rho = -0.871 across 79 problems from 11 parallel exams. The relationship weakened in a 106-problem introductory-course sample (rho = -0.552, near zero at exam level, where cohort composition dominates), and the authors set explicit limits: AI difficulty scales can inform problem validation and fairness discussion but must not drive individual student evaluation or automatic grade adjustment.",
-      "topic": "applications"
+      "summary": "Difficulty differences across parallel-class programming exams threaten grading fairness, and the study repositions large language models from evaluation targets to evidence sources for calibrating that difficulty, triangulated with student performance, item exposure, online-judge process data, and teacher interpretation. When ten models solved a final exam alongside 120 students, **AI pass rate correlated with student pass rate at Spearman rho = 0.866**, and a structured LLM reviewer's difficulty ratings correlated with problem-level pass rates at rho = -0.871 across 79 problems from 11 parallel exams. The correlations weaken substantially on an introductory-course sample where cohort composition dominates, and the authors explicitly bound the method: AI difficulty scales can inform problem validation and fairness discussions but must not drive individual grading.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07524",
@@ -648,10 +676,11 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Training deep learning models on variable-length long sequences forces a trade-off between static configurations that waste compute through workload imbalance and complex methods that demand significant code changes. Data-Centric Parallel (`DCP`) lets the data drive the runtime, dynamically adjusting parallel size, gradient accumulation, and recomputation based on each batch's sequence lengths. The method achieves **up to a 2.88× speedup on 32 H200 GPUs** and integrates into any model with about ten lines of code.",
-      "topic": "other",
+      "summary": "Training on batches of widely varying sequence lengths forces a choice between static configurations that waste compute through workload imbalance and complex load-balancing systems that require invasive code changes. `Data-Centric Parallel` (`DCP`) lets the data drive the runtime instead, dynamically adjusting parallel size, gradient accumulation, and recomputation per batch based on its sequence lengths. The approach delivers **up to a 2.88x speedup on 32 H200 GPUs** and integrates into new models with about ten lines of code.",
+      "topic": "llms",
       "highlight": true,
-      "highlight_summary": "Training on datasets whose sequence lengths span orders of magnitude forces a bad choice: static parallel configurations waste GPUs on workload imbalance and communication overhead, while adaptive compiler-based systems demand invasive code changes. `DCP` (Data-Centric Parallel) instead lets each batch's sequence length drive the runtime directly, dynamically picking the sequence-parallel size, gradient accumulation, and recomputation settings per batch.\n\n- A cheap \"dual-layer\" profiling pass runs just two transformer layers per (batch size, parallel size) candidate to estimate full-model speed and memory, after which `DCP-inter` balances workers by giving fast batches extra gradient-accumulation steps rather than shrinking batch sizes, and `DCP-intra` additionally turns off activation checkpointing for short sequences where spare memory allows.\n- On 32 H200 GPUs across three synthetic length distributions, DCP reaches **up to 2.88× throughput** over a bucket-parallel baseline (**2.70×** from `DCP-inter` alone on the 5B `Transformer-1D`, **1.68×** on the 1.2B `Transformer-2D`), with the largest gains on short-sequence-dominated data.\n- Dropping unnecessary recomputation gives `DCP-intra` a further **20–25% speedup** over `DCP-inter` for sequences under 200k tokens, and DCP maintains a consistently low idle-time ratio and **near-linear weak scaling** where the baseline's throughput decays with cluster size.\n- The method is deliberately lightweight — integration into a new model takes **at most 10 lines of code**, and it composes with existing sequence-parallel schemes like `DeepSpeed Ulysses` and `ZeRO-1`.\n- It currently applies only to Transformer architectures and single-model systems, and the evaluation uses synthesized datasets and compares against bucket parallel rather than heavier compiler-based schedulers like `HotSPa`."
+      "highlight_summary": "Training on datasets whose sequence lengths span orders of magnitude forces a bad choice: static parallel configurations waste GPUs on workload imbalance and communication overhead, while adaptive compiler-based systems demand invasive code changes. `DCP` (Data-Centric Parallel) instead lets each batch's sequence length drive the runtime directly, dynamically picking the sequence-parallel size, gradient accumulation, and recomputation settings per batch.\n\n- A cheap \"dual-layer\" profiling pass runs just two transformer layers per (batch size, parallel size) candidate to estimate full-model speed and memory, after which `DCP-inter` balances workers by giving fast batches extra gradient-accumulation steps rather than shrinking batch sizes, and `DCP-intra` additionally turns off activation checkpointing for short sequences where spare memory allows.\n- On 32 H200 GPUs across three synthetic length distributions, DCP reaches **up to 2.88× throughput** over a bucket-parallel baseline (**2.70×** from `DCP-inter` alone on the 5B `Transformer-1D`, **1.68×** on the 1.2B `Transformer-2D`), with the largest gains on short-sequence-dominated data.\n- Dropping unnecessary recomputation gives `DCP-intra` a further **20–25% speedup** over `DCP-inter` for sequences under 200k tokens, and DCP maintains a consistently low idle-time ratio and **near-linear weak scaling** where the baseline's throughput decays with cluster size.\n- The method is deliberately lightweight — integration into a new model takes **at most 10 lines of code**, and it composes with existing sequence-parallel schemes like `DeepSpeed Ulysses` and `ZeRO-1`.\n- It currently applies only to Transformer architectures and single-model systems, and the evaluation uses synthesized datasets and compares against bucket parallel rather than heavier compiler-based schedulers like `HotSPa`.",
+      "interest": 3
     },
     {
       "id": "2608.07525",
@@ -682,8 +711,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Static hallucination benchmarks for multimodal large language models (MLLMs) suffer from narrow taxonomical coverage and rapid saturation, failing to reflect robustness in evolving real-world scenarios. The framework pairs `UniHall`, a fine-grained benchmark built on a unified taxonomy spanning Object, Instruction, and Knowledge dimensions, with Self-Adaptive Multimodal Fuzzing (`SAMF`), which uses evolutionary mutation strategies and an ensemble of multimodal oracles to probe the boundaries of model hallucination. State-of-the-art MLLMs degrade significantly under fuzzing compared to conventional evaluation, exposing a dissociation between reasoning capability and factual grounding, and the experiments reveal a helpfulness-hallucination trade-off in which **reinforcement learning alignment inadvertently exacerbates sycophancy in instruction-following tasks**.",
-      "topic": "multimodal"
+      "summary": "Static hallucination benchmarks for multimodal large language models cover narrow failure taxonomies and saturate quickly, masking how brittle models are on evolving inputs. The framework pairs `UniHall`, a fine-grained benchmark spanning Object, Instruction, and Knowledge dimensions, with `SAMF` (Self-Adaptive Multimodal Fuzzing), which uses evolutionary mutation strategies and an ensemble of multimodal oracles to probe hallucination boundaries dynamically. **State-of-the-art models degrade significantly under fuzzing compared with conventional evaluation**, exposing a dissociation between reasoning ability and factual grounding, and the experiments surface a helpfulness-hallucination trade-off in which reinforcement-learning alignment worsens sycophancy on instruction-following tasks.",
+      "topic": "multimodal",
+      "interest": 3
     },
     {
       "id": "2608.07527",
@@ -710,8 +740,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Long-document question answering requires finding and combining evidence across many pages, tables, figures, and charts, but retrieval-augmented systems typically select evidence from a static index before generation. The system instead treats the task as a mutable-state process: an external harness exposes search, reading, note-taking, and review tools, maintains a hierarchical document tree and note store that update as the agent records evidence, and enforces a fixed context budget. With `GPT-5.4` the harness reaches **71.4% on `MMLongBench-Doc`, exceeding the 65.8% human-expert reference**, and a compact `Qwen3.5-4B` vision-language model trained with end-to-end reinforcement learning in the same environment reaches 63.7% versus a 54.4% direct-input baseline.",
-      "topic": "agents"
+      "summary": "Answering questions over long documents with many pages, tables, and figures usually means either retrieving from a static index before generation or prompting a frozen proprietary model with tools. `DocAtlas` instead wraps the model in a mutable document harness: an external environment exposing search, reading, note-taking, and review tools that maintains a hierarchical tree and note store updated as the agent records evidence, all under a fixed context budget. With `GPT-5.4` the system reaches **71.4% on `MMLongBench-Doc`, exceeding the 65.8% human-expert reference**, and a `Qwen3.5-4B` vision-language model trained with end-to-end reinforcement learning in the same environment reaches 63.7% versus a 54.4% direct-input baseline.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.07528",
@@ -731,10 +762,11 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Linear probes can detect corrupted context in language models with near-perfect accuracy, yet on multi-hop arithmetic chains **probes that see the corruption turn out to be uninformative about final answer correctness**, and models forced into structured confidence formats collapse to two values with indistinguishable error rates. This knowing-but-not-saying dissociation holds across model families, including reasoning models, and refutes the pre-registered hypothesis that probe persistence across hops separates correct from incorrect outcomes. As real-time monitors, probe-based interventions prove sharply model- and error-type-dependent: branch-and-pick is net-positive across models and uniquely non-breaking on `Llama-3.1-8B` (4 traces rescued, 0 broken), while reprompting and replacing priors break correct traces at roughly the rate they rescue wrong ones, so the deployable answer is model-aware, error-type-aware routing.",
+      "summary": "Internal linear probes and verbalized confidence give conflicting pictures of when a language model is about to fail, and the study measures that gap on multi-hop arithmetic chains with corrupted context. **Probes detect the corrupted context with near-perfect accuracy yet are uninformative about whether the final answer is correct**, while models forced into structured confidence formats collapse to two values with indistinguishable error rates, a knowing-but-not-saying pattern that holds across model families including reasoning models. As a real-time monitor, probe-triggered interventions are sharply model- and error-type-dependent: a branch-and-pick strategy is net-positive and uniquely non-breaking on `Llama-3.1-8B`, but reprompting and replacing prior context break correct traces at roughly the rate they rescue wrong ones.",
       "topic": "safety-and-alignment",
       "highlight": true,
-      "highlight_summary": "Language models that silently operate on corrupted context give no verbal sign of it, even though the error is plainly encoded in their activations — this work shows that detecting an internal error state and predicting whether it will corrupt the final answer are two very different problems.\n\n- On a contrastive dataset of **1,400 multi-hop arithmetic traces** with five injected error types, a linear probe on the residual stream detects corrupted context with **AUROC above 0.98** across five `Qwen` and `Llama` variants (peaking at **0.997** on `Llama-3.1-8B`), yet the same probe's failure-prediction AUROC collapses to **near chance (0.47–0.53)**.\n- Verbal channels are uninformative: elicited confidence collapses to two extreme values with indistinguishable wrong rates, no surface uncertainty signal exceeds 0.70 detection AUROC, and instruct models produce **zero hedging** across 258 corrupted traces each.\n- Enabling chain-of-thought on `Qwen3-4B` leaves probe AUROC essentially unchanged but drops error-condition accuracy from **27.9% to 1.2%**, so extended reasoning widens rather than closes the knowing-saying gap.\n- As a runtime monitor, probe-triggered `branch-and-pick` is net-positive on every model and uniquely non-breaking on `Llama-3.1-8B` (**4 rescued, 0 broken**), while `reprompt` and `replace-prior` break correct traces at roughly the rate they rescue wrong ones.\n- The authors claim decodability rather than causation, report their pre-registered persistence-beats-peak hypothesis as refuted, and note that the proposed error-type-aware routing rests on small per-type samples (9–16 traces) and a classifier they do not yet have."
+      "highlight_summary": "Language models that silently operate on corrupted context give no verbal sign of it, even though the error is plainly encoded in their activations — this work shows that detecting an internal error state and predicting whether it will corrupt the final answer are two very different problems.\n\n- On a contrastive dataset of **1,400 multi-hop arithmetic traces** with five injected error types, a linear probe on the residual stream detects corrupted context with **AUROC above 0.98** across five `Qwen` and `Llama` variants (peaking at **0.997** on `Llama-3.1-8B`), yet the same probe's failure-prediction AUROC collapses to **near chance (0.47–0.53)**.\n- Verbal channels are uninformative: elicited confidence collapses to two extreme values with indistinguishable wrong rates, no surface uncertainty signal exceeds 0.70 detection AUROC, and instruct models produce **zero hedging** across 258 corrupted traces each.\n- Enabling chain-of-thought on `Qwen3-4B` leaves probe AUROC essentially unchanged but drops error-condition accuracy from **27.9% to 1.2%**, so extended reasoning widens rather than closes the knowing-saying gap.\n- As a runtime monitor, probe-triggered `branch-and-pick` is net-positive on every model and uniquely non-breaking on `Llama-3.1-8B` (**4 rescued, 0 broken**), while `reprompt` and `replace-prior` break correct traces at roughly the rate they rescue wrong ones.\n- The authors claim decodability rather than causation, report their pre-registered persistence-beats-peak hypothesis as refuted, and note that the proposed error-type-aware routing rests on small per-type samples (9–16 traces) and a classifier they do not yet have.",
+      "interest": 3
     },
     {
       "id": "2608.07529",
@@ -764,8 +796,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Existing benchmarks test general knowledge rather than the engineering, environmental, and policy trade-offs of solid waste management (SWM) practice. `WuYuEval` evaluates large language models with a Foundation Module of 4,590 quality-audited multiple-choice questions across six task types and eight domain categories, plus an Expert Module of 247 scenario-based open-ended questions scored by anchor-calibrated LLM-as-a-Judge and Elo-based pairwise comparison. Across 33 models the leader reached 94.64% on foundation questions, but **average accuracy fell from 84.14% on easy questions to 42.50% on hard ones**, with weaknesses concentrated in calculation, experimental design, urban planning, and open-ended expert tasks. Reasoning-oriented Thinking modes helped most matched model pairs, but only when deliberation stayed anchored to units, assumptions, and engineering constraints.",
-      "topic": "applications"
+      "summary": "General-knowledge benchmarks say little about whether language models can handle professional solid waste management decisions constrained by engineering, environmental, and policy factors. The benchmark pairs a Foundation Module of 4,590 audited multiple-choice questions across six task types and eight domain categories with an Expert Module of 247 scenario-based open-ended questions, scored by anchor-calibrated LLM-as-a-judge and Elo-based pairwise comparison. Across 33 models the leader hit 94.64% on foundational questions, but **average accuracy fell from 84.14% on easy questions to 42.50% on hard ones**, with weakness concentrated in calculation, experimental design, and open-ended expert tasks, and reasoning modes helped only when deliberation stayed anchored to units, assumptions, and engineering constraints.",
+      "topic": "applications",
+      "interest": 1
     },
     {
       "id": "2608.07530",
@@ -785,8 +818,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Authoring SHACL shapes to validate RDF knowledge graphs requires technical expertise most domain experts lack, and translating natural-language requirements into SHACL has had no dedicated benchmark — partly because semantically equivalent shapes can differ in serialisation and structure, making string comparison inadequate for evaluation. The benchmark suite supplies evaluation methods that go beyond string matching and is used to assess four state-of-the-art large language models. The models prove **highly capable of generating syntactically valid SHACL but still struggle to produce semantically equivalent constraints** for complex logical and structural patterns.",
-      "topic": "llms"
+      "summary": "Authoring SHACL shapes to validate RDF knowledge graphs requires expertise most domain specialists lack, and no benchmark existed for translating natural-language requirements into SHACL — a task where string comparison fails because semantically equivalent shapes can differ in serialization and structure. `NL2SHACL-Bench` fills that gap with a benchmark suite and semantics-aware evaluation methods, applied to four state-of-the-art large language models. The models **reliably generate syntactically valid SHACL but struggle to produce semantically equivalent constraints for complex logical and structural patterns**.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.07531",
@@ -812,8 +846,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Search-augmented language agents should retrieve external information only when necessary and ground answers in evidence, but sparse outcome rewards cannot distinguish grounded retrieval from redundant search, while richer process rewards require costly annotation or LLM-judge inference during training. `Search-G1` derives an intrinsic reward from the policy's own representations via two intervention-calibrated readouts — a prompt-state readout predicting whether closed-book knowledge suffices, which defines retrieval necessity, and an answer-commit readout measuring the answer's sensitivity to evidence deletion — both periodically refit as reinforcement learning shifts the policy's representations. Across search-based question-answering benchmarks at two model scales, the approach **improves the grounding versus search-cost trade-off, producing shorter trajectories at competitive accuracy** without process annotations or judge calls during policy optimization.",
-      "topic": "reinforcement-learning"
+      "summary": "Outcome rewards for search-augmented agents cannot tell grounded retrieval apart from redundant searching, while richer process supervision or LLM judges are expensive to run during training. `Search-G1` derives intrinsic rewards from the policy's own representations using two intervention-calibrated readouts: a prompt-state readout predicting whether closed-book knowledge suffices, and an answer-commit readout measuring how sensitive the answer is to deleting retrieved evidence, with both refit periodically as reinforcement learning shifts the policy. Across search-based question-answering benchmarks and two model scales, the approach **improves the grounding versus search-cost trade-off, yielding shorter trajectories at competitive accuracy** without process annotations or judge inference during training.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.07532",
@@ -831,8 +866,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Multi-agent large language model systems typically either fix communication in advance or allow full broadcast, and both inflate token cost, latency, redundancy, and error propagation as more agents activate. Agent selection and communication are modeled as a cooperative game with task-conditioned net utility separating coalition-level value from per-agent activation costs, combining a marginal-value activation rule, a greedy router, per-edge communication pricing, and estimated Shapley values to predict which agents are worth contacting; limited approximation guarantees are proved for a monotone cardinality-constrained case and an unconstrained non-monotone case, while the main router remains a heuristic. In synthetic experiments, **greedy routing achieves 99.5% of brute-force-optimal utility while activating on average 1.96 of 8 agents**, versus 38.8% for full broadcast, though performance drops to 66% under strong submodularity violations or noisy value estimates.",
-      "topic": "agents"
+      "summary": "Multi-agent systems built from language models with heterogeneous skills typically either fix communication topology in advance or broadcast to everyone, both of which inflate token cost, latency, and error propagation. Agent selection and communication are modeled as a cooperative game with task-conditioned net utility, yielding a marginal-value activation rule, a greedy router extended with per-edge communication costs, and estimated Shapley values to predict which agents are worth contacting, alongside limited submodular-maximization guarantees that do not cover the main heuristic router. In synthetic experiments, **greedy routing achieves 99.5% of brute-force-optimal utility while activating 1.96 of 8 agents on average**, versus 38.8% for full broadcast, though performance drops to 66% under strong submodularity violations or noisy value estimates.",
+      "topic": "agents",
+      "interest": 2
     },
     {
       "id": "2608.07533",
@@ -852,10 +888,11 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Embodied agents are usually evaluated with manually annotated visual question answering pairs or high-level task-success metrics, both of which can conceal unsafe or spatially incoherent behavior behind completed tasks. Inspired by metamorphic testing from software engineering, the framework automatically generates test cases from real execution trajectories using metamorphic relations grounded in logical rules and physical laws, encoded as executable `Prolog` rules whose violations flag spatial-cognition failures. Across three embodied scenarios it detected 90,422 spatial cognition errors in state-of-the-art multimodal-LLM-driven agents, whose Spatial Cognition scores of **0.44 to 0.52 fall far below the human benchmark of 0.96**.",
+      "summary": "Evaluating embodied agents through annotated question-answering pairs is labor-intensive, while task-success metrics can hide agents that complete tasks through unsafe or nonsensical spatial behavior. Borrowing metamorphic testing from software engineering, the framework automatically generates test cases from real execution trajectories using metamorphic relations grounded in logical rules and physical laws, encoded as executable `Prolog` rules whose violations indicate spatial cognition failures. Across three embodied scenarios it detected 90,422 spatial cognition errors in state-of-the-art agents driven by multimodal large language models, and **all tested agents scored between 0.44 and 0.52 on the proposed Spatial Cognition score against a human benchmark of 0.96**.",
       "topic": "agents",
       "highlight": true,
-      "highlight_summary": "Evaluating embodied agents by task success or hand-annotated VQA hides \"false positive successes,\" where an agent reaches its goal despite misjudging directions, distances, or sizes along the way. `MetaSpace` sidesteps the test-oracle problem with metamorphic testing: it auto-generates test cases from agents' real execution trajectories and checks their spatial judgments for self-consistency against logical and physical laws, no ground-truth labels required.\n\n- Six metamorphic relations — transitivity, symmetry, non-contradiction, the triangle inequality, size-depth consistency, and object size-ratio consistency — are encoded as executable `Prolog` rules, and agent answers are converted into facts so a logic engine can flag any violation as a spatial cognition error.\n- Running **30,300 auto-generated test cases** against six MLLM-driven agents (`GPT-5`, `GPT-4o`, `Claude Sonnet 4`, `Qwen-VL`, `InternVL3.5-8B`, `DeepSeek-VL2-small`) across household navigation, robotic-arm manipulation, and drone scenarios surfaced **90,422 spatial cognition errors**.\n- All agents scored between **0.44 and 0.52** on the proposed Spatial Cognition score, far below the **0.96 human baseline**, with directional reasoning the weakest link (**below 0.38** across the board) while magnitude estimation mostly cleared 0.5.\n- The errors are not marginal misses: relaxing the physical-law tolerance thresholds by 50% improved `GPT-4o`'s score by only about 0.05, indicating gross violations of consistency rather than borderline estimates.\n- Chain-of-thought prompting barely helped in mitigation experiments, whereas spatially-aware prompting with cognitive maps showed early promise; results also lean on structured answer formats and a YOLO-based object pipeline, and the size/depth relations assume an idealized pinhole-camera model."
+      "highlight_summary": "Evaluating embodied agents by task success or hand-annotated VQA hides \"false positive successes,\" where an agent reaches its goal despite misjudging directions, distances, or sizes along the way. `MetaSpace` sidesteps the test-oracle problem with metamorphic testing: it auto-generates test cases from agents' real execution trajectories and checks their spatial judgments for self-consistency against logical and physical laws, no ground-truth labels required.\n\n- Six metamorphic relations — transitivity, symmetry, non-contradiction, the triangle inequality, size-depth consistency, and object size-ratio consistency — are encoded as executable `Prolog` rules, and agent answers are converted into facts so a logic engine can flag any violation as a spatial cognition error.\n- Running **30,300 auto-generated test cases** against six MLLM-driven agents (`GPT-5`, `GPT-4o`, `Claude Sonnet 4`, `Qwen-VL`, `InternVL3.5-8B`, `DeepSeek-VL2-small`) across household navigation, robotic-arm manipulation, and drone scenarios surfaced **90,422 spatial cognition errors**.\n- All agents scored between **0.44 and 0.52** on the proposed Spatial Cognition score, far below the **0.96 human baseline**, with directional reasoning the weakest link (**below 0.38** across the board) while magnitude estimation mostly cleared 0.5.\n- The errors are not marginal misses: relaxing the physical-law tolerance thresholds by 50% improved `GPT-4o`'s score by only about 0.05, indicating gross violations of consistency rather than borderline estimates.\n- Chain-of-thought prompting barely helped in mitigation experiments, whereas spatially-aware prompting with cognitive maps showed early promise; results also lean on structured answer formats and a YOLO-based object pipeline, and the size/depth relations assume an idealized pinhole-camera model.",
+      "interest": 3
     },
     {
       "id": "2608.07534",
@@ -872,8 +909,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Classical model theory's idealized notion of satisfaction is reworked for finite computational scale: in Ultraconstructive Model Theory (UCMT), satisfaction is replaced by **bounded adversarial survival of finite partial structures**. A structure is tested by an Opponent drawing legal challenges from a bounded attack surface, repaired by a Builder through legal replies, and certified by a symbolic Judge, recasting semantic evaluation as a game among resource-bounded players.",
-      "topic": "theory"
+      "summary": "Classical model theory idealizes satisfaction in ways that ignore computational scale, and the proposed framework replaces it with **bounded adversarial survival over finite partial structures**. A finite partial structure is tested in a game where an Opponent draws legal challenges from a bounded attack surface, a Builder repairs the structure through legal replies, and a symbolic Judge certifies the outcome.",
+      "topic": "theory",
+      "interest": 1
     },
     {
       "id": "2608.07535",
@@ -899,8 +937,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Integrating heterogeneous modalities through alignment and fusion reshapes the safety landscape of multi-modal large language models (MLLMs): **cross-modal interactions give rise to novel threats — compromised modality integration, modality misalignment, and fused safety risks — that frameworks rooted in uni-modal learning do not capture**. The survey proposes a multimodal-grounded taxonomy of safety threats covering adversarial attacks, data poisoning, jailbreaks, and hallucinations, and analyzes how threat models shift beyond uni-modal assumptions. It then summarizes updated safety assumptions, organizes recent MLLM safety strategies accordingly, and discusses open challenges for building more principled and scalable multimodal safety mechanisms.",
-      "topic": "safety-and-alignment"
+      "summary": "Fusing multiple modalities reshapes the safety landscape of large models in ways that frameworks built on uni-modal assumptions do not capture. The survey proposes a multimodal-grounded taxonomy of threats covering adversarial attacks, data poisoning, jailbreaks, and hallucinations, arguing that **modality integration, misalignment, and fusion create qualitatively new attack surfaces** that shift the underlying threat models. It then organizes recent defense strategies around updated safety assumptions and closes with open challenges for building principled, scalable safety mechanisms for multimodal systems.",
+      "topic": "safety-and-alignment",
+      "interest": 3
     },
     {
       "id": "2608.07537",
@@ -922,8 +961,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-12",
-      "summary": "Subjective judgments from a Vision-Language Model (VLM) serve as the selection pressure in a genetic algorithm evolving virtual soft robots: the VLM views sequence images of two individuals' locomotion and picks winners in pairwise comparisons against terms like 'adorably' and 'weirdly', driving simultaneous evolution of morphology and movement. **VLM-based subjective selection accelerates population convergence compared to random selection** while producing distinctive morphologies and motions for each evaluation term. Human participants only partly agreed with individual VLM choices — and repeated human evaluation caused noticeable fatigue — yet the evolved tendencies were qualitatively similar, and the emergence of similar outcomes across different terms suggests the VLM decomposes subjective words into multiple internal criteria rather than applying them literally.",
-      "topic": "other"
+      "summary": "Evolutionary algorithms usually rely on hand-designed fitness functions or fatiguing human-in-the-loop judgments, and this work substitutes a vision-language model as the subjective selector. Virtual soft robots evolve morphology and locomotion together in a genetic algorithm where the model compares image sequences of two individuals' movement against subjective terms like \"adorably\" and \"weirdly,\" with its pairwise choices serving as selection pressure. **Subjective selection by the vision-language model accelerated population convergence compared with random selection** and produced distinctive morphologies per term, while a human study found only partial agreement on individual choices but qualitatively similar evolutionary outcomes, and the similarity of results across different terms suggests the model decomposes them into shared internal criteria rather than applying them literally.",
+      "topic": "other",
+      "interest": 2
     }
   ]
 }

@@ -66,6 +66,7 @@ def main() -> int:
         result = summaries.get(paper["id"], {})
         paper["summary"] = result.get("summary")
         paper["topic"] = result.get("topic")
+        paper["interest"] = result.get("interest")
         if "error" in result:
             paper["summary_error"] = result["error"]
 

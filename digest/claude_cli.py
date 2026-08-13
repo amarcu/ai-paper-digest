@@ -27,9 +27,15 @@ CHUNK_INSTRUCTIONS = (
     "use light inline Markdown: wrap the single most important finding or number in "
     "**bold**, and put names of models, methods, datasets, and benchmarks in "
     "`backticks`. No links, headers, or bullet lists inside summaries. Also assign each "
-    f"paper the single best-fitting topic tag from: {', '.join(TOPICS)}.\n\n"
+    f"paper the single best-fitting topic tag from: {', '.join(TOPICS)}. "
+    "Also rate each paper's breadth of interest as an integer 1-5: 5 = a landmark "
+    "result or new capability most people following AI would want to know about; 4 = a "
+    "notable advance relevant beyond its immediate subfield; 3 = a solid contribution "
+    "of interest across its subfield; 2 = incremental or narrowly scoped; 1 = a highly "
+    "specific application or minor variation offering little general insight. Rate "
+    "breadth of relevance, not paper quality.\n\n"
     "Output ONLY a JSON array with one object per paper, in the form "
-    '{"id": "<paper id>", "summary": "<2-4 sentences>", "topic": "<tag>"}. '
+    '{"id": "<paper id>", "summary": "<2-4 sentences>", "topic": "<tag>", "interest": <1-5>}. '
     "No markdown fences, no commentary before or after the array.\n"
 )
 
@@ -67,11 +73,22 @@ def run_prompt(prompt: str, timeout: int = CALL_TIMEOUT_SECONDS) -> str:
     return completed.stdout
 
 
+def _coerce_interest(value) -> int | None:
+    try:
+        return max(1, min(5, int(value)))
+    except (TypeError, ValueError):
+        return None
+
+
 def _run_chunk(papers: list[dict]) -> dict[str, dict]:
     entries = _extract_json_array(run_prompt(_chunk_prompt(papers)))
     valid_ids = {p["id"] for p in papers}
     return {
-        entry["id"]: {"summary": entry.get("summary"), "topic": entry.get("topic")}
+        entry["id"]: {
+            "summary": entry.get("summary"),
+            "topic": entry.get("topic"),
+            "interest": _coerce_interest(entry.get("interest")),
+        }
         for entry in entries
         if isinstance(entry, dict) and entry.get("id") in valid_ids
     }

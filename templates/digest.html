@@ -15,8 +15,8 @@
     {% if highlights %}
     <a href="#highlights">Highlights <span class="n">{{ highlights | length }}</span></a>
     {% endif %}
-    {% for topic, papers in topics %}
-    <a href="#{{ topic }}">{{ topic_labels.get(topic, topic) }} <span class="n">{{ papers | length }}</span></a>
+    {% for topic, papers, folded in topics %}
+    <a href="#{{ topic }}">{{ topic_labels.get(topic, topic) }} <span class="n">{{ (papers | length) + (folded | length) }}</span></a>
     {% endfor %}
   </nav>
 
@@ -61,9 +61,9 @@
   </section>
   {% endif %}
 
-  {% for topic, papers in topics %}
+  {% for topic, papers, folded in topics %}
   <section class="topic" id="{{ topic }}">
-    <h2>{{ topic_labels.get(topic, topic) }} <span class="count">{{ papers | length }}</span></h2>
+    <h2>{{ topic_labels.get(topic, topic) }} <span class="count">{{ (papers | length) + (folded | length) }}</span></h2>
     <div class="topic-grid">
       {% for paper in papers %}
       <details class="paper">
@@ -88,6 +88,19 @@
       </details>
       {% endfor %}
     </div>
+    {% if folded %}
+    <details class="folded">
+      <summary>{{ folded | length }} more specialized paper{{ "s" if folded | length != 1 }}</summary>
+      <ul class="folded-list">
+        {% for paper in folded %}
+        <li>
+          <a href="{{ paper.link }}">{{ paper.title }}</a>
+          <span class="who">{{ paper.authors[:3] | join(", ") }}{% if paper.authors | length > 3 %} et al.{% endif %}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </details>
+    {% endif %}
   </section>
   {% endfor %}
 {% endblock %}

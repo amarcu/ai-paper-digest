@@ -39,7 +39,12 @@ SYSTEM_PROMPT = (
     "Within the summary use light inline Markdown: wrap the single most important "
     "finding or number in **bold**, and put names of models, methods, datasets, and "
     "benchmarks in `backticks`; no links, headers, or bullet lists. "
-    "Also assign the single best-fitting topic tag."
+    "Also assign the single best-fitting topic tag, and rate the paper's breadth of "
+    "interest from 1 to 5: 5 = a landmark result or new capability most people "
+    "following AI would want to know about; 4 = a notable advance relevant beyond its "
+    "immediate subfield; 3 = a solid contribution of interest across its subfield; "
+    "2 = incremental or narrowly scoped; 1 = a highly specific application or minor "
+    "variation offering little general insight. Rate breadth of relevance, not quality."
 )
 
 OUTPUT_SCHEMA = {
@@ -50,8 +55,14 @@ OUTPUT_SCHEMA = {
             "description": "Two to four sentence plain-language digest of the paper.",
         },
         "topic": {"type": "string", "enum": TOPICS},
+        "interest": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Breadth of interest: 5 broad landmark, 1 narrow niche.",
+        },
     },
-    "required": ["summary", "topic"],
+    "required": ["summary", "topic", "interest"],
     "additionalProperties": False,
 }
 

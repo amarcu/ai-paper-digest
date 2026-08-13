@@ -295,6 +295,35 @@ section h2 .count {
 .highlight .paper-summary { -webkit-line-clamp: 2; }
 .highlight .paper-more { padding: 0 1.2rem 1.1rem; }
 
+/* Folded low-interest papers */
+.folded { margin-top: 0.7rem; }
+.folded > summary {
+  display: inline-block;
+  list-style: none;
+  cursor: pointer;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted);
+  border: 1px dashed var(--line);
+  border-radius: 999px;
+  padding: 0.28rem 0.85rem;
+}
+.folded > summary::-webkit-details-marker { display: none; }
+.folded > summary::marker { content: ""; }
+.folded > summary:hover { color: var(--accent); border-color: var(--accent); }
+.folded[open] > summary { color: var(--accent); border-style: solid; }
+.folded-list { list-style: none; margin: 0.6rem 0 0; padding: 0; }
+.folded-list li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.85rem;
+  line-height: 1.45;
+}
+.folded-list li:last-child { border-bottom: none; }
+.folded-list a { font-family: var(--serif); color: var(--ink); }
+.folded-list a:hover { color: var(--accent); }
+.folded-list .who { color: var(--muted); font-size: 0.75rem; margin-left: 0.4rem; }
+
 /* Archive */
 .archive-list { list-style: none; padding: 0; margin: 1.2rem 0; }
 .archive-list li {

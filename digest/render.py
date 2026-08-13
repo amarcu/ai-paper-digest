@@ -104,12 +104,25 @@ def _load_days(data_dir: Path) -> list[dict]:
     return days
 
 
-def _group_topics(papers: list[dict]) -> list[tuple[str, list[dict]]]:
+# Papers rated below this breadth-of-interest score collapse into a compact
+# title-only list per topic; unscored papers (older data) stay featured.
+FOLD_BELOW = 3
+
+
+def _group_topics(papers: list[dict]) -> list[tuple[str, list[dict], list[dict]]]:
     groups: dict[str, list[dict]] = {}
     for paper in papers:
         groups.setdefault(paper.get("topic") or "unclassified", []).append(paper)
     # Largest topics first; ties alphabetical for a stable page layout.
-    return sorted(groups.items(), key=lambda item: (-len(item[1]), item[0]))
+    ordered = sorted(groups.items(), key=lambda item: (-len(item[1]), item[0]))
+    return [
+        (
+            topic,
+            [p for p in group if (p.get("interest") or FOLD_BELOW) >= FOLD_BELOW],
+            [p for p in group if (p.get("interest") or FOLD_BELOW) < FOLD_BELOW],
+        )
+        for topic, group in ordered
+    ]
 
 
 def _feed_description(day: dict) -> str:
