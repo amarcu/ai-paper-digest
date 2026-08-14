@@ -86,6 +86,9 @@ a:focus-visible, summary:focus-visible {
   gap: 1.2rem 2.5rem;
   padding: 1.8rem 0 0.9rem;
 }
+/* Fixed slot sized for the longest date ("Wednesday, September 30, 2026")
+   so the calendar sits in the same spot on every page. */
+.masthead-info { flex: 0 0 35rem; max-width: 100%; }
 .masthead h1 {
   font-family: var(--serif);
   font-weight: 600;
