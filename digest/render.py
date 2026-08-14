@@ -15,7 +15,7 @@ import re
 import shutil
 import sys
 from datetime import date as date_type
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from email.utils import format_datetime
 from pathlib import Path
 
@@ -125,6 +125,48 @@ def _group_topics(papers: list[dict]) -> list[tuple[str, list[dict], list[dict]]
     ]
 
 
+# Volume thresholds for the calendar heat levels (papers per day).
+CAL_LEVELS = [(500, 4), (300, 3), (150, 2), (1, 1)]
+
+
+def _cal_level(count: int) -> int:
+    for threshold, level in CAL_LEVELS:
+        if count >= threshold:
+            return level
+    return 0
+
+
+def _build_calendar(days: list[dict], today: date_type) -> dict:
+    """GitHub-style activity grid: one column per week (Monday-start), cells
+    colored by paper count and linking to that day's archive page."""
+    counts = {d["date"]: d["paper_count"] for d in days}
+    first = date_type.fromisoformat(days[0]["date"])
+    this_monday = today - timedelta(days=today.weekday())
+    first_monday = first - timedelta(days=first.weekday())
+    weeks_count = min(53, max(12, (this_monday - first_monday).days // 7 + 1))
+    start = this_monday - timedelta(weeks=weeks_count - 1)
+
+    weeks, month_labels = [], []
+    for index in range(weeks_count):
+        week_start = start + timedelta(weeks=index)
+        month = week_start.strftime("%b")
+        previous = (week_start - timedelta(weeks=1)).strftime("%b")
+        month_labels.append(month if index == 0 or previous != month else "")
+        cells = []
+        for offset in range(7):
+            day = week_start + timedelta(days=offset)
+            count = counts.get(day.isoformat(), 0)
+            cells.append({
+                "date": day.isoformat(),
+                "count": count,
+                "level": _cal_level(count),
+                "future": day > today,
+                "label": (f"{count} papers · " if count else "") + day.strftime("%b %-d"),
+            })
+        weeks.append(cells)
+    return {"weeks": weeks, "month_labels": month_labels}
+
+
 def _feed_description(day: dict) -> str:
     highlights = [p for p in day["papers"] if p.get("highlight")]
     leads = highlights or day["papers"]
@@ -152,10 +194,13 @@ def render_site(data_dir: Path, out_dir: Path, base_url: str) -> int:
     (out_dir / "archive").mkdir(parents=True, exist_ok=True)
     shutil.copyfile(REPO_ROOT / "templates" / "style.css", out_dir / "style.css")
 
+    calendar = _build_calendar(days, date_type.today())
+
     def digest_context(day: dict, index: int, root: str) -> dict:
         return {
             "day": day,
             "root": root,
+            "calendar": calendar,
             "topics": _group_topics(day["papers"]),
             "highlights": [p for p in day["papers"] if p.get("highlight")],
             "topic_labels": TOPIC_LABELS,
@@ -175,7 +220,8 @@ def render_site(data_dir: Path, out_dir: Path, base_url: str) -> int:
 
     newest_first = list(reversed(days))
     (out_dir / "archive.html").write_text(
-        archive_template.render(days=newest_first, root=""), encoding="utf-8"
+        archive_template.render(days=newest_first, root="", calendar=calendar),
+        encoding="utf-8",
     )
 
     for day in newest_first:

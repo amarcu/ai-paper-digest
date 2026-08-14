@@ -2,6 +2,7 @@
 {% block title %}Archive — AI Paper Digest{% endblock %}
 {% block content %}
   <h1>Archive</h1>
+  {% include "calendar.html" %}
   <ul class="archive-list">
     {% for day in days %}
     <li>
