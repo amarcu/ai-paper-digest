@@ -10,9 +10,9 @@
     {% if cell.count %}
     <a class="cal-cell l{{ cell.level }}{{ ' current' if day is defined and cell.date == day.date }}"
        href="{{ root }}archive/{{ cell.date }}.html"
-       title="{{ cell.label }}" aria-label="{{ cell.label }}"></a>
+       data-tip="{{ cell.label }}" aria-label="{{ cell.label }}"></a>
     {% else %}
-    <span class="cal-cell{{ ' future' if cell.future }}" title="{{ cell.label }}"></span>
+    <span class="cal-cell{{ ' future' if cell.future }}" data-tip="{{ cell.label }}"></span>
     {% endif %}
     {% endfor %}
     {% endfor %}

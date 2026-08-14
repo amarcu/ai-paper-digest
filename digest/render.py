@@ -156,12 +156,19 @@ def _build_calendar(days: list[dict], today: date_type) -> dict:
         for offset in range(7):
             day = week_start + timedelta(days=offset)
             count = counts.get(day.isoformat(), 0)
+            pretty = day.strftime("%b %-d")
+            if count:
+                label = f"{count} papers · {pretty}"
+            elif day > today:
+                label = pretty
+            else:
+                label = f"No digest · {pretty}"
             cells.append({
                 "date": day.isoformat(),
                 "count": count,
                 "level": _cal_level(count),
                 "future": day > today,
-                "label": (f"{count} papers · " if count else "") + day.strftime("%b %-d"),
+                "label": label,
             })
         weeks.append(cells)
 

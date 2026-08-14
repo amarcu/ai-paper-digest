@@ -110,7 +110,11 @@ a:focus-visible, summary:focus-visible {
 .day-meta a.stat { color: var(--accent); }
 
 /* Contribution-style calendar */
-.cal { margin: 0 auto 0.2rem; max-width: 100%; overflow-x: auto; }
+.cal { margin: 0 auto 0.2rem; max-width: 100%; }
+@media (max-width: 56rem) {
+  /* Narrow screens scroll the grid; no hover there, so no clipped tooltips. */
+  .cal { overflow-x: auto; }
+}
 .cal-months, .cal-grid {
   display: grid;
   grid-auto-flow: column;
@@ -129,10 +133,36 @@ a:focus-visible, summary:focus-visible {
 /* The 4px frame keeps the current-day ring inside the scroll container. */
 .cal-grid { grid-template-rows: repeat(7, 12px); padding: 4px; }
 .cal-cell {
+  position: relative;
   width: 12px;
   height: 12px;
   border-radius: 2.5px;
   background: color-mix(in srgb, var(--line) 55%, var(--card));
+}
+.cal-cell::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 7px);
+  left: 50%;
+  translate: -50%;
+  z-index: 20;
+  white-space: nowrap;
+  padding: 0.22rem 0.55rem;
+  border-radius: 4px;
+  background: var(--ink);
+  color: var(--paper);
+  font: 500 0.72rem/1.4 var(--sans);
+  font-variant-numeric: tabular-nums;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.12s;
+  pointer-events: none;
+}
+.cal-cell:hover::after,
+a.cal-cell:focus-visible::after { opacity: 1; visibility: visible; }
+.cal-cell.future::after { content: none; }
+@media (prefers-reduced-motion: reduce) {
+  .cal-cell::after { transition: none; }
 }
 .cal-cell.future { visibility: hidden; }
 a.cal-cell:hover { outline: 1px solid var(--accent); }
