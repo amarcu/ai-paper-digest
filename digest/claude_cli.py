@@ -11,11 +11,13 @@ from __future__ import annotations
 import json
 import re
 import subprocess
+import time
 
 from .summarize import TOPICS
 
 CHUNK_SIZE = 20
 CALL_TIMEOUT_SECONDS = 600
+RETRY_PAUSE_SECONDS = 20
 
 CHUNK_INSTRUCTIONS = (
     "You write entries for a public daily digest of new AI research papers. For each "
@@ -69,7 +71,12 @@ def run_prompt(prompt: str, timeout: int = CALL_TIMEOUT_SECONDS) -> str:
         timeout=timeout,
     )
     if completed.returncode != 0:
-        raise RuntimeError(f"claude -p exited {completed.returncode}: {completed.stderr.strip()[:300]}")
+        # Drop the CLI's startup warnings so the tail holds the actual error.
+        stderr = "\n".join(
+            line for line in completed.stderr.strip().splitlines()
+            if not line.startswith("Permission deny rule")
+        )
+        raise RuntimeError(f"claude -p exited {completed.returncode}: {stderr[-300:]}")
     return completed.stdout
 
 
@@ -101,13 +108,15 @@ def summarize_papers_cli(papers: list[dict], chunk_size: int = CHUNK_SIZE) -> di
     for number, chunk in enumerate(chunks, start=1):
         result: dict[str, dict] = {}
         error = None
-        for _attempt in range(2):
+        for attempt in range(2):
             try:
                 result = _run_chunk(chunk)
                 error = None
                 break
             except (RuntimeError, ValueError, json.JSONDecodeError, subprocess.TimeoutExpired) as exc:
                 error = str(exc)[:200]
+                if attempt == 0:
+                    time.sleep(RETRY_PAUSE_SECONDS)
         for paper in chunk:
             summaries[paper["id"]] = result.get(paper["id"]) or {"error": error or "missing_from_response"}
         done = sum(1 for s in summaries.values() if "summary" in s)

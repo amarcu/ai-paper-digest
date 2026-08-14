@@ -178,8 +178,8 @@ a.cal-cell:hover { outline: 1px solid var(--accent); }
   top: 0;
   z-index: 10;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.4rem;
-  overflow-x: auto;
   padding: 0.6rem 0;
   margin: 0.6rem 0 0.4rem;
   border-bottom: 1px solid var(--line);
@@ -190,6 +190,15 @@ a.cal-cell:hover { outline: 1px solid var(--accent); }
   scrollbar-width: none;
 }
 .topic-nav::-webkit-scrollbar { display: none; }
+@media (max-width: 48rem) {
+  /* Single scrolling row on narrow screens, with a fade hinting at more. */
+  .topic-nav {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    mask-image: linear-gradient(90deg, #000 calc(100% - 1.5rem), transparent);
+    -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 1.5rem), transparent);
+  }
+}
 .topic-nav a {
   flex: none;
   padding: 0.28rem 0.7rem;
