@@ -469,10 +469,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul",
+      "summary": "A dense pretrained model, `Qwen2.5-0.5B-Instruct`, is split into a prelude, a weight-tied recurrent block, and a coda so its middle layers can run repeatedly and learn an iterative latent update rather than a terminal-answer lookup. Training with intermediate-step supervision teaches the model to compute one task step per loop, and the behavior persists when only final answers are graded; a 6M-parameter adapter over frozen weights matches full 180M-parameter block training (83.8% versus 84.0%), and the learned operation **extrapolates to roughly 1.5 times its supervised depth, holding 70% accuracy at depth 18**. Against a same-size model trained on written scratchpads, the recurrent version scores 84% versus 72% overall, retains 53% versus 2.5% beyond depth 10, and answers 7.6 times faster. Teaching the inverse rule proved impossible without destroying the installed mechanism, marking a catastrophic-interference boundary.",
+      "topic": "reasoning",
+      "interest": 3,
       "highlight": true,
       "highlight_summary": "Adding computation depth to a transformer normally means more layers at design time or more generated tokens at inference; this work asks whether a third axis — repeatedly applying one shared block — can be surgically retrofitted into an already-pretrained dense model instead of trained from scratch. `Qwen2.5-0.5B-Instruct` is cut into a Prelude, a weight-tied Recurrent Block, and a Coda, joined by a trainable bridge that re-injects the Prelude representation on loops 2 and beyond, with the one-loop route reproducing the base computation exactly so that loop-1 evaluation measures preservation rather than a different model.\n\n- Training uses exact intermediate-state supervision on a synthetic pointer-chasing task so that each execution of the block performs exactly one rule application, and the stepwise behavior survives a final 1,000 steps of outcome-only annealing: **97.7%** of held-out intermediate states still decode correctly, and when a depth-3 problem is forced to run to loop 8, **93.0%** of the extra states contain the *next* symbol in the chain while only 1 of 384 parks on the answer — evidence that a reusable procedure, not terminal-answer lookup, was installed.\n- The identical surgery installs at two very different budgets — 180.6M forward-active full-block parameters versus a rank-16 `LoRA` adapter at **6.01M** (3.3% of the full budget, base weights untouched and hash-verified) — and the two are statistically indistinguishable overall at **83.8% versus 84.0%**, with the adapter actually ahead through depth 11 and the full block winning only at depths 12–14, an interpolated crossover at depth 11.54.\n- The installed operation extrapolates to roughly **1.44–1.50×** its supervised depth across supports 4, 6, 8, and 12 and two alphabet sizes, with the support-12 run holding **70.3% at depth 18** before falling to 46.1% at depth 20 and 10.9% at depth 22 — a support-scaled frontier with a real tail ceiling rather than open-ended algorithmic generalization, and one that requires training dose to scale with support.\n- Against preregistered dense controls on 1,792 identical frozen rows, the recurrent model beat a same-size serialized-scratchpad `SFT` baseline **84% versus 72%** overall and **53.1% versus 2.5%** on depths 11–14 (the scratchpad is at ceiling through depth 10, then collapses to zero), while answering **7.6× faster** at depth 14 (301.8 ms versus ~2.28 s) from a single decoded state instead of 96 generated tokens, at constant sequence length and no KV-cache growth.\n- Limits are reported as carefully as the wins: zero-shot transfer to verbal renderings is minimal at both budgets (**~16–20%**) though installed history beats fresh training by **18.6 points** once verbal fine-tuning starts, preservation is non-inferior on the `ARC` battery only at loop 1 (forced loop 8 degrades ARC-Challenge to 71 versus 155), learned depth selection remains an open registered negative, and the reverse-lookup task marks a catastrophic-interference boundary — learnable in isolation at **63/64**, but no continuation at either budget acquired it while keeping the installed mechanism and general capability."
     },
@@ -499,10 +498,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "`InfraBench` evaluates AI agents on realistic computing-infrastructure management tasks spanning the full system stack and the full operational lifecycle, with fine-grained per-check risk assessment. Across 15 agent-model configurations, mean effective scores range from roughly 40% to 88% and **no configuration achieves a full score across all tasks**, while running every task three times shows even top configurations pass only a fraction of their attempts. Per-check scoring exposes a recurring failure mode in which agents satisfy the immediate objective but leave non-durable changes, broken distributed invariants, unsafe side effects, and uncleaned state behind. The tasks, evaluation harness, and a live leaderboard are public.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.11235",
@@ -520,10 +518,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Diffusion language models (DLMs) resolve many tokens per step, but blockwise decoders keep issuing dense forward passes until every position is settled, even though many predictions stabilize early. `CORA-Diff` is a training-free method that leaves the model's original transfer rule untouched and applies confidence-and-persistence gating only to the positions that rule leaves unresolved, with a single operating point calibrated on a held-out `GSM8K` subset and frozen for all evaluations. Under a matched `LLaDA` protocol it has the lowest runtime in all eight task-length settings, with **incremental speedups of 2.70x on `GSM8K` and 3.32x on `HumanEval`** over EOS-aware dense decoding and a largest quality drop of 1.22 points, and it transfers to `Dream` without retuning.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11236",
@@ -549,10 +546,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Roleplay evaluation usually collapses to a single opaque score with no record of which role requirements were exercised. `TRACE Bench` decomposes each role profile offline into a fixed checklist, then has a User Agent converse naturally with the target model while privately updating checklist states, so scores trace back to specific items and the dialogue turns that support them. Auditing released free-dialogue transcripts from the `MiniMax Role-play Benchmark` against the same checklist shows they touch only 73.74% of key role-profile points, whereas the checklist-driven conversations reach **99.91% coverage in fewer turns**. Rankings across 26 models stay stable under repeated runs and User Agent replacement.",
+      "topic": "llms",
+      "interest": 2
     },
     {
       "id": "2608.11237",
@@ -576,10 +572,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Neural operators rolled out autoregressively over long horizons accumulate local errors as spectral inconsistency, phase misalignment, or mean drift, largely because the repeatedly applied latent transition increment is left unstructured. `GeoIncNO` predicts latent increments for residual advancement and uses lightweight low-rank projectors to regulate channel coupling within frequency bands derived from the increment's spectral energy, then reconstructs physical fields by fusing stable mean structure and fluctuations separately with phase correction applied only to the zero-mean component. Across **six partial differential equation benchmarks covering 1D, 2D, and 3D dynamical systems**, it reports better accuracy, rollout stability, and spectral fidelity than competing neural-operator baselines.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11238",
@@ -600,10 +595,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Existing retrieval-augmented generation evaluation struggles to give consistent, fine-grained diagnostics across query types ranging from close-ended fact lookup to open-ended explanation. `Q-CARE` is a reference-free framework that decomposes queries into sub-queries and answers into atomic claims, then scores retrieval by how well retrieved evidence covers the sub-queries (`C-Prec@k`, `C-nDCG@k`) and generation by claim completeness, conciseness, and verifiableness. On a human-annotated benchmark spanning eight datasets it **correlates with human judgment better than four existing metrics, including `RAGEval` and `RAGChecker`**.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11239",
@@ -623,10 +617,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Database administrators routinely over-allocate RAM to buffer pools to stay safely within service level agreements (SLAs), wasting memory. `MicroTune` is an online reinforcement learning system that resizes the buffer pool dynamically, trained on extensive traces of both external metrics such as latency and throughput and internal database status variables, with several RL algorithms compared to select the control core. It tracks workload fluctuations and reports **substantial memory savings with fewer SLA violations than baseline tuning strategies**.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11240",
@@ -645,10 +638,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Vector quantization has become central to AI infrastructure and is seeing a surge of new algorithms, but comparing them is inconsistent. The framework identifies 7 conceptual quantization primitives that can be composed arbitrarily and then **re-expresses 25 common quantizers as pipelines built from those primitives**. `VQ-bench` is released open source with reproducible public benchmarks so new methods can be added and compared on equal terms.",
+      "topic": "other",
+      "interest": 3
     },
     {
       "id": "2608.11241",
@@ -667,10 +659,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Putting language-model agents into industrial recommender operations creates a three-way tension between general autonomy, industrial determinism such as schema-conforming extraction and non-crashing A/B tests, and end-to-end efficiency. `RecSys Factory` grants autonomy only at bounded decision points inside pre-committed pipelines: runtime is driven by three host-emitted event sources (`Claude Code` Stop hooks, corporate instant-message webhooks, and workflow scheduler APIs) so nothing runs during the 94% of wall-clock spent waiting on Spark or GPU jobs, and capability comes from a 29-file skill library whose per-skill pitfall tables compile into a 400-entry store. Over a 78-day deployment across three Tencent business lines the platform recorded **1,624 command-line tool dispatches at a 78.6% aggregate success rate**, with humans retained at the diagnostic-versus-execution boundary through a schema-validated, replayable card protocol.",
+      "topic": "agents",
+      "interest": 2
     },
     {
       "id": "2608.11242",
@@ -690,10 +681,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "When a context window fills up, language-model systems compact prior history, and user instructions meant to bind for the rest of a session, such as \"do not delete any emails until I confirm,\" get silently dropped. `COMPINT` measures this loss across multi-turn chat, agentic trajectories, and long-horizon research, finding current compactors **retain only 17% of injected session constraints on average**, with most performing worse than running the same task without compaction at all. Retention swings sharply with compactor, prompt, context length, constraint phrasing, and injection location, indicating a systematic rather than setting-specific failure. A plug-and-play constraint-aware extractor running alongside the compactor pushes retention above 90% in all three scenarios without modifying the compactor or the model.",
+      "topic": "agents",
+      "interest": 4
     },
     {
       "id": "2608.11243",
@@ -710,10 +700,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "The argument is that semantic safety constraints, such as \"the agent does not escape its sandbox,\" are off-support objects: unlike the real log-canonical threshold (RLCT) of singular learning theory (SLT), the safety predicate is not measurable with respect to the model and the data distribution. From that single non-invariance follow several claims as corollaries: why reward hacking and sandbox escape emerge under outcome-based optimization, why Bayesian prior design and soft penalty weighting have poor leverage in singular models, and, centrally, why **hard invariants belong in the containment harness while only soft dispositions belong in the model**. The same predicate is nonetheless locally certifiable by formal verification, mirroring how the local learning coefficient locally pins the RLCT, with the residual difficulty of identifying which off-support region matters coinciding with performative prediction. The July 2026 OpenAI-Hugging Face evaluation incident is the motivating case, and numerical experiments plus Lean proofs are released.",
+      "topic": "safety-and-alignment",
+      "interest": 3
     },
     {
       "id": "2608.11244",
@@ -733,10 +722,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Applying building construction standards currently depends on keyword document search and manual cross-clause interpretation, which cannot support multi-clause reasoning or traceable evidence links. `BEST-KAG` builds a multimodal knowledge graph unifying document hierarchy and heterogeneous standard content via a hybrid rule-and-language-model extraction pipeline, covering **251 building engineering standards with 171,652 nodes and 310,914 edges**, and answers questions through graph retrieval so each response is grounded in specific clauses. Expert evaluation along with BLEU and ROUGE scores place it above mainstream language models, with improvements up to 74.01% over baselines.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11245",
@@ -757,10 +745,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Online courses scale well but suffer from low engagement and weak long-term retention. `AI-Tutor` is a reinforcement learning tutor that optimizes both horizons at once: short-term, it uses cognitive theory to balance new material against reinforcement of prior learning; long-term, it models learner engagement to pick strategies that sustain motivation and reduce dropout. Evaluated on **23 million learning records from 33,700 learners**, it outperforms state-of-the-art baselines on engagement, knowledge retention, and final outcomes, with learning-path analysis showing how its strategy shifts across learner profiles.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11246",
@@ -786,10 +773,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Coding agents established that capability depends on the harness surrounding the model, not the model alone, and `Thea` tests whether the same holds for robots by wrapping robot capabilities as callable tools inside an agentic loop. The physical world withholds two things software provides free, reading world state and judging whether an action succeeded, so the harness adds `Scene Graph as Context`, a persistent symbolic world representation, and `Evaluation as Exit Codes`, which detects when an action should terminate, judges success, and diagnoses the cause of failure. **Closing that perception-and-judgment loop lets composed tools produce rich emergent behavior and carry long-horizon tasks to completion in real environments.**",
+      "topic": "robotics",
+      "interest": 4
     },
     {
       "id": "2608.11247",
@@ -807,10 +793,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "In collaborative multi-model settings each agent sees peer assertions before answering, so a wrong majority can overturn an answer the model would otherwise get right. Measuring 23 open-weight models across 19 conditions and three datasets, over a million graded responses, a unanimous wrong majority reverses **22.8% of correct `MMLU` answers, 54.8% on `GPQA`, and 71.0% on `SimpleQA`**, with 84-89% of reversals matching the peers' answer. Existing mitigations target only Resistance, the rate of holding a correct answer under pressure, so the work pairs it with Receptivity, the rate of adopting a correct peer answer after being wrong; six methods all trade one for the other and fall on a single frontier with R^2 between 0.80 and 0.90, with `Reflection` gaining 7.9 Resistance points and losing 15.3 of Receptivity. Reasoning is the sole exception, raising Resistance by 7.2 points and Receptivity by 9.6 on MMLU subjects a model can derive for itself.",
+      "topic": "llms",
+      "interest": 4
     },
     {
       "id": "2608.11248",
@@ -828,10 +813,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Memory-augmented language agents mostly store and retrieve past experience, but distilled insights go stale, become over-generalized, or turn harmful in new task contexts, polluting memory when reused. `EvoGraph-Mem` maintains insights as nodes in an editable graph, each tracking positive evidence, negative evidence, and an activation state, with utility-aware retrieval and a controller that after every task keeps reliable insights, archives invalid ones, revises outdated ones, and adds newly discovered ones. It **outperforms representative memory-based agent baselines across different backbone models**, and ablations show append-only memory is insufficient for long-horizon tasks while evidence-aware retrieval and graph editing each improve reliability.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.11249",
@@ -852,10 +836,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul",
+      "summary": "Neural compressors built on large language models achieve far better lossless compression ratios on text and code than `zstd`, `gzip`, or `bzip`, but their one-symbol-per-step autoregressive decoding makes throughput impractical. Swapping in diffusion language models removes that bottleneck since each forward pass can encode a variable number of symbols at freely chosen positions, though this breaks the assumptions of the standard compression pipeline and requires new algorithms for deciding what gets encoded when. Evaluated on the `enwik8` benchmark against both language-model-based and general-purpose compressors, the diffusion framework **advances the state of the art in lossless text compression**.",
+      "topic": "llms",
+      "interest": 3,
       "highlight": true,
       "highlight_summary": "Neural compressors built on autoregressive LLMs beat `gzip` and `zstd` on text by a wide margin but run at kilobits per second, because the model must do one forward pass per token. Replacing the autoregressive backbone with a masked diffusion language model lets the compressor commit many tokens per forward pass, turning sequential depth from an architectural constraint into a tunable knob on the compression–throughput curve.\n\n- The pipeline starts from a fully masked window, and at each of `K` denoising steps the DLM (`LLaDA`-8B) emits distributions over all masked positions at once; a chosen subset is encoded with either `rANS` or symbol ranking plus a general-purpose compressor, then revealed as context for the next step.\n- Two new design problems arise that autoregressive models never face: the **commitment schedule** (uniform blocks, geometric-growth progressive, or entropy-based, committing every position whose predicted entropy falls below a threshold `τ`) and the **initial context** (leaving `c` tokens unmasked and stored in the header, selected contiguously, randomly, by token rarity, or by Attention Rollout scores).\n- On the first 10 MB of `enwik8`, the diffusion pipeline spans **0.127 compression ratio at 1.01 kbit/s** (rANS) through **0.246 at 165.79 kbit/s** (symbol ranking), against `FineZip`'s **0.079 at 0.10 kbit/s** and `LLMZip`'s **0.079 at 0.09 kbit/s** — up to four orders of magnitude more throughput while still compressing better than general-purpose tools.\n- The decompression gap is larger still: prior LLM methods use teacher forcing to compress in one pass but cannot during decoding, so they need `n` sequential passes per window, whereas the diffusion pipeline's decompression throughput matches its compression throughput almost exactly (**166.12 vs 165.79 kbit/s**), which the authors argue is roughly six orders of magnitude faster at decode.\n- Ablations favor the entropy-based schedule for ratio at any token budget and attention-based initial context across all configurations — contiguous prefixes, the only option available to LLMs, degrade below random selection at high throughput — but the work rests on a single 8B model and a single benchmark, prior decompression figures are estimated rather than measured, and even the fastest setting remains around six orders of magnitude slower than `zstd`."
     },
@@ -881,10 +864,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Language models can propose many plausible trading factors, but an autonomous research system also has to allocate evaluation budget, verify its own evidence, and record provenance. `AgonAlpha` searches over frozen research artifacts, including hypotheses, executable expressions, platform evidence, rationales, and review status, rather than formulas alone, and combines verified artifact search with a fresh-context adversarial reviewer that re-executes candidates and holds veto authority, plus pending-aware parallel budget allocation. Independent deployments on `WorldQuant BRAIN` across five users and six model backends produced top-grade alphas with **Fitness reaching 9.50 and Sharpe reaching 3.48**, retaining prompt-to-expression provenance for every submission.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11251",
@@ -906,10 +888,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Regulatory pressure such as the EU AI Act has raised the stakes on fairness, yet standard technical approaches rarely engage philosophical ethics or social context, and the variable selection step in particular can bake in implicit bias affecting subgroup equity. The position argued is that **all potentially relevant variables, including sensitive ones, should be retained so that fairness can be assessed at finer granularity**, since excluding them is what compromises equity between subgroups. The broader call is for interdisciplinary collaboration that aligns mathematical fairness methodology with ethical reasoning and regulatory compliance.",
+      "topic": "safety-and-alignment",
+      "interest": 2
     },
     {
       "id": "2608.11252",
@@ -928,10 +909,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Agentic systems routinely carry conclusions across biological, clinical, and financial contexts, and the emerging safeguard is local verification: checking at each step that entities are representable, parameters compatible, and outputs coherent. Modeling context space by the nerve of a covering and evidence as a real-valued 1-cochain makes chained reasoning a path integral, so conclusions are path-independent exactly when the cochain is exact and disagreement between valid paths is the holonomy of a first Čech cohomology class. The central result is that **no family of simplex-supported consistency checks can distinguish evidence with a harmonic component from evidence without it**, even though that component alone generates disagreement between valid paths, so detection requires a statistic on a cycle basis. The resulting procedure, `Ksetra`, gates abstention on the estimated harmonic component and supplies an exact F-test for the existence of a global claim, calibrated on foreign exchange data where it is correctly sized, fires on loop arbitrage, and ignores triangular arbitrage.",
+      "topic": "theory",
+      "interest": 2
     },
     {
       "id": "2608.11255",
@@ -1860,10 +1840,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Online communities where survivors of sexual violence share experiences have been studied for stigma and for peer support separately, but not for how the two connect. The `SCOPE` dataset links stigma signals in Reddit survivor narratives — annotated as experienced, internalized, anticipated, or structural stigma — to the support types found in the corresponding comment threads, covering information, emotional, esteem, tangible, and group-interaction support. Contextual, linguistic, and emotion analyses show that stigma-bearing posts dwell on internalized distress while non-stigma posts focus more on interpreting situations, and that **internalized stigma is the most prevalent category while community responses stay broadly stable across stigma types**, with information and esteem support the most common replies.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11434",
@@ -1887,10 +1866,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Benchmarks for mobile phone agents increasingly delegate the question of whether a task was completed to a language-model judge, without checking how trustworthy those judges are. `MobileJudgeBench` assembles 931 human-annotated agent trajectories drawn from 6 mobile agent benchmarks, 4 agent models, and 68 apps, and scores 6 judging methods — adapted from `SPA-Bench`, `A3`, `AndroidArena`, and `AgentRewardBench`, plus a deliberately simple baseline — across several language-model backends. **A plain baseline judge fed sampled screenshots matches or beats the purpose-built judging pipelines, with the underlying model rather than the pipeline design driving quality**; judge accuracy also predicts both agent ranking fidelity and downstream reward quality for on-policy reinforcement learning, and two backends show opposite failure styles, one conservative and one permissive.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.11441",
@@ -1908,10 +1886,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Low-resource automatic speech recognition (ASR) usually adapts a model from a higher-resource donor language, but picking a good donor is hard for spontaneous speech from under-resourced communities where orthography and data availability vary. `DonorRank` casts the choice as a learning-to-rank problem that predicts which donors will transfer well in zero-shot ASR, evaluated on two multilingual corpora covering Indic and African language families. **The learned ranking beats common heuristics such as genetic relatedness or defaulting to a high-resource language**, and analyses show that which linguistic cues predict successful transfer depends on the composition of the candidate donor pool.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11451",
@@ -1933,10 +1910,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "End-to-end driving agents post good average scores yet still break elementary traffic rules, because they learn statistical regularities rather than the physical conditions that make a maneuver safe. The proposed neuro-symbolic guard bolts onto the command interface of an already-trained agent, checking each outgoing command against explicit safety rules and swapping in the nearest safe alternative only when a rule fires, so every intervention is traceable and no retraining or extra learned component is needed. Wrapped around `TransFuser v6` on the long-tail benchmarks `Fail2Drive` and `Bench2Drive`, it **raises success rate by 15% and cuts safety-critical collisions by up to 53%** while leaving the original driving score intact.",
+      "topic": "robotics",
+      "interest": 3
     },
     {
       "id": "2608.11452",
@@ -1956,10 +1932,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Text-to-image models are increasingly asked to illustrate poetry, but existing metrics such as `CLIPScore`, `BLIPScore`, and `VQAScore` reward literal word-image correspondence and cannot judge whether an illustration captures imagery, cultural style, or a poem's unstated emotion. `TangPoetryBench` supplies 1,280 images — 320 classical Chinese Tang poems rendered by 4 recent text-to-image models — with quality-controlled human annotations across ten dimensions, exposing shared and model-specific weaknesses, particularly in evoking implicit emotion. The accompanying `PoemAutoEvaluator`, an open rubric-conditioned judge, **reaches parity with a strong proprietary judge (`Claude`) and transfers to an unseen generator and to Song Ci poetry**, letting the benchmark grow without new human labeling.",
+      "topic": "multimodal",
+      "interest": 2
     },
     {
       "id": "2608.11460",
@@ -1977,10 +1952,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Guidance on how to work effectively with language-model assistants comes either from top-down theory or from narrow observational studies, both of which age badly as model capabilities shift. Principal Trait Analysis borrows the logic of principal component analysis to mine conversation corpora for recurring interaction patterns, called traits, using language-model processing stages to derive traits across a dataset, score each collaborator's style on them, optionally inject domain expertise, and keep the traits with the highest variance across people. On two collaborative coding datasets — students with an artificial intelligence (AI) tutor and developers with an AI coding agent — **the derived traits significantly explain collaborator behavior and help predict task outcomes**, though the authors report inconclusive evidence on whether traits generalize or change over time, so calling them skills remains premature.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.11465",
@@ -2000,10 +1974,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "PAC-Bayes generalization bounds control the Kullback-Leibler (KL) divergence between posterior and prior over parameters, but risk depends only on a hypothesis's predictive behavior, and in over-parameterized models many distinct parameter settings implement identical behavior. Formalizing behavioral equivalence through a measurable behavior map and disintegrating measures over the configuration space, the work **splits the classical PAC-Bayes KL exactly into a behavior-selection term and a realization-level term averaged within behavioral fibers**, defining the negative of the latter as Z-information — the precise gap between parameter-space complexity and complexity over behavior alone. The behavior-selection term is shown to have a variational characterization as the smallest KL among posteriors inducing the same behavior distribution, attained by a fiber-symmetrized representative, with symmetry, behavior-preserving directions, and invariance properties following from the same structure.",
+      "topic": "theory",
+      "interest": 2
     },
     {
       "id": "2608.11469",
@@ -2028,10 +2001,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Security agents do well on source code, but malware, firmware, and proprietary software arrive as binaries, requiring reverse engineering to recover semantics first — and existing benchmarks either leak their source into training data or are too small to resemble real software. `SRE-Bench` was built from scratch by reverse-engineering experts over more than 5,000 hours: 19 private programs averaging 16.9K lines of code, hardened with 44 in-house anti-analysis primitives to yield 262 binaries and 1,572 deterministically graded tasks. Across `GPT-5.6-sol`, `Claude-Opus-5`, `GPT-5.5`, `Grok-4.5`, and `GLM-5.2`, **the best model scores 61.4% per instance and fully solves only 31.5% of instances**; agents also prove oddly insensitive to compiler optimization and static linking compared with human analysts, and ablations confirm that both contamination control and realistic program scale matter.",
+      "topic": "agents",
+      "interest": 4
     },
     {
       "id": "2608.11483",
@@ -2057,10 +2029,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Turning a screening hit into a lead compound means repeatedly designing analogs that balance potency, selectivity, physicochemical properties, pharmacokinetics, safety, and whether the molecule can actually be synthesized. `SABLE` (Synthetically-accessible Agentic Bayesian Ligand Exploration) uses a language model to interpret stated design goals and route work to specialized tools that enumerate analogs from reaction templates, predict physicochemical and ADMET properties, score structure-based binding affinity, and run Bayesian optimization, forming a computational twin of the analyze-and-prioritize half of the design-make-test-analyze cycle with provenance for every number. Across single- and multi-objective studies the framework **enriches candidate sets for the stated objectives while evaluating only a fraction of the enumerated chemical space**, and tools or backends can be swapped through a config file without touching the orchestration logic.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11493",
@@ -2080,10 +2051,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Offline recommender evaluation leans on hand-maintained feature pipelines, and using a language model to predict engagement straight from raw text logs looks like a cheaper substitute — except that zero-shot models exhibit what the authors call bidirectional rationalization, arguing persuasively for both engagement and non-engagement on the same item from the same evidence. The fix is a sequential behavioral alignment recipe that fine-tunes on real outcomes and then applies preference optimization over paired correct and counterfactual rationales. On real homepage interaction logs the aligned model **gains 32.19% in Macro-F1 over the zero-shot baseline and matches the production feature-engineered system**, while emitting human-readable reasoning traces.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11499",
@@ -2101,10 +2071,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Task vectors let separately fine-tuned models be merged without joint retraining, but which tasks get merged varies in practice, and existing methods tune scalar coefficients per subset — expensive to repeat and limited to linear rescaling of the vectors. `HyperFix` reframes this as a combinatorial correction problem and trains a lightweight hypernetwork that predicts subset-conditioned nonlinear corrections directly in weight space, fitted once on singleton, pair, and triple subsets drawn from a task bank and then applied to larger unseen subsets with no per-subset optimization. A local perturbation analysis bounds the residual left over by linear merging and justifies learning it from small task updates; across diverse benchmarks the method **outperforms existing task vector merging approaches while cutting tuning cost**.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.11500",
@@ -2122,10 +2091,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Full justified representation (FJR) is one of the strongest satisfiable proportionality guarantees for approval-based committee elections, and although an FJR committee can be computed in polynomial time, checking whether a given committee satisfies it is coNP-complete. `FJR+` is proposed as a strict strengthening of both FJR and EJR+ that **can be verified and satisfied in polynomial time**, and the Residual-Budget Greedy algorithm is shown to output a partial committee whose every size-k completion satisfies it. That slack allows completion via sequential Phragmén, yielding a rule that satisfies FJR+ and the sub-core and is priceable whenever at least k candidates are approved; the authors also give a Droop-quota variant and extend the property to approval-based participatory budgeting with arbitrary project costs.",
+      "topic": "theory",
+      "interest": 2
     },
     {
       "id": "2608.11506",
@@ -2142,10 +2110,9 @@
       "announce_type": "cross",
       "feed_category": "cs.LG",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Acting well when observations are incomplete requires internal state that carries more than the current sensory input, and Barrett and Miller describe biological categorization as predictive, compressive, functionally organized, and constrained by allostasis — the regulation of internal resources. Recurrent and spiking agents trained on an energy-constrained foraging task with threat avoidance and contact-dependent consumption are probed for those four properties: learned agents beat random and heuristic baselines, a trace-augmented recurrent policy is strongest, and **early internal dynamics predict later fully-safe-and-efficient success at up to 0.802 ROC-AUC**, above a permutation baseline. Predictive signal is spread across trace, policy-head, internal-dynamics, observation, and allostatic features, low-energy state stays decodable even after energy-related features are removed, and targeted perturbations to memory, sensing, and allostatic mechanisms change both behavior and internal predictions — a computational analogue of allostatic organization rather than a claim about biology.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.11510",
@@ -2169,10 +2136,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Congruency effects — slower, worse responses when an automatic tendency conflicts with an instructed rule, as in the Stroop and flanker tasks — have been studied for a century without a settled mechanistic account. A purely verbal analogue is built for language models: a prompt stem elicits a default same-color completion while an explicit rule either agrees with it or contradicts it, tested on `Gemma-2-2B` and six `Pythia` models from 410M to 12B parameters. Six of the seven models show strong congruency effects, and causal attribution, attention analysis, and attention ablations reveal **two distinct pathways — short-range attention to a superficial color cue that dominates congruent trials, and long-range attention to the rule prefix that dominates incongruent ones**. Fine-tuning that strengthens the default mapping helps congruent and hurts incongruent trials, while enlarging the rule set selectively hurts incongruent trials, both consistent with competition between an in-weight default and an in-context rule.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11511",
@@ -2192,10 +2158,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Sequential decision-making agents conventionally sense and act at every timestep, yet tasks like brewing coffee contain stretches where the environment evolves fine on its own and constant monitoring wastes compute or attention that could go elsewhere. The proposal trains a waiting policy that chooses where to pause and for how many timesteps, deliberately forgoing sensing during the commitment, formalized as minimizing sensing and decision frequency subject to not degrading task performance and optimized with reinforcement learning over lexicographically ordered objectives. Across 4 discrete-state household tasks and 3 continuous-state environments the method learns waiting behavior and can retrofit it onto pre-trained policies, **sometimes waiting for more than 50 percent of the task duration** without losing task performance.",
+      "topic": "reinforcement-learning",
+      "interest": 3
     },
     {
       "id": "2608.11513",
@@ -2217,10 +2182,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Prompt wording is known to move model behavior, but the effect of framings borrowed from the psychology of human persuasion has not been measured for coding work. Eight influence tactics from Yukl and Falbe's taxonomy — including rational persuasion, ingratiation, and exchange — were turned into reproducible prompt templates and run through five open-weight models on `LiveCodeBench` and `SWE-bench Verified`, with outputs scored for functional correctness, code quality, maintainability, and security. **Framings that emphasize urgency were associated with lower correctness and weaker security**, the first large-scale evidence that persuasion-style linguistic cues systematically shape generated code.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11521",
@@ -2241,10 +2205,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "World action models pick robot actions conditioned on a predicted future, but generating that future by iterative video rollout is slow at deployment. Paired closed-loop interventions across four such models on all 40 `LIBERO` tasks show the policies genuinely depend on future values and their positions — masking or reassigning them degrades execution — yet for `Joint` and `Cosmos-2`, replaying a single fixed final key/value cache preserves behavior almost exactly (1.7-1.9 cm end-effector displacement error, 97.9-98.2% success), separating cache consumption from cache production. `RIFT` exploits that gap by using learned anticipation tokens to build the entire future cache in one backbone pass, reaching **98.8% success on `LIBERO` while cutting action-chunk latency by 68.2-89.1%** relative to rollout-based baselines, and 92.9/92.6% on clean and randomized `RoboTwin 2.0` scenes.",
+      "topic": "robotics",
+      "interest": 3
     },
     {
       "id": "2608.11528",
@@ -2265,10 +2228,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Group alignment tunes a language model to reflect a demographic group's opinions and values, and alignment generally is known to breed sycophancy — over-agreeing with the user regardless of the facts — but group alignment work measures only how closely outputs match group opinion. Group Alignment-induced Sycophancy (GAS) evaluates both sides across 3 alignment methods, 4 models, and 13 demographic groups, tracking the intended opinion-alignment gain alongside the unintended sycophancy shift. **Under an identical alignment budget both effects vary substantially by group**, with some groups gaining far more opinion alignment than others and the sycophancy shift forming a group-specific multi-dimensional profile rather than a uniform change, which argues for reporting group alignment as a two-sided profile instead of a single fit score.",
+      "topic": "safety-and-alignment",
+      "interest": 3
     },
     {
       "id": "2608.11531",
@@ -2285,10 +2247,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "CCSK is a reversible extension of the process calculus CCS, and its notions of behavioral equivalence — strong versus weak, forward-only versus reversible — have not been fully mapped, with the weak reversible case unstudied. Two candidate weak reversible bisimilarities are proposed, directional and mixed, differing in whether internal tau actions must run in the same direction (forward or backward) as the action they match. **Mixed bisimilarity is shown to be a congruence and to abstract away from tau actions completely**, unlike its directional counterpart.",
+      "topic": "theory",
+      "interest": 1
     },
     {
       "id": "2608.11532",
@@ -2309,10 +2270,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Digital-twin-based vehicular ad hoc networks use federated learning to keep vehicle data private, but heterogeneous and sparse data across vehicle types leaves the shared global model poorly fitted to any of them. Hierarchical Federated Transfer Learning clusters vehicles by type and layers transfer learning onto federation, with separate algorithms for cloud-server global updates and intra-cluster transfer, plus a data-quality scoring mechanism that limits the influence of malicious vehicles on the global model. Experiments on real-world datasets across several metrics report **improved global model accuracy and efficiency over the federated learning baseline**.",
+      "topic": "applications",
+      "interest": 1
     },
     {
       "id": "2608.11534",
@@ -2809,10 +2769,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Transcription is the main bottleneck in language documentation, and multilingual automatic speech recognition (ASR) models like `Whisper` are hard for field linguists to use without machine learning expertise. `Easper` is an open-source, no-code workflow that fine-tunes ASR models on cloud resources directly from `ELAN` annotation files, and it is used here to study the cold-start question of which recordings to transcribe first. Fine-tuning session by session on three Vanuatu languages (Bislama, Nafsan, and Nguna) and tracking Character Error Rate, the authors compare prioritising acoustically clean audio against prioritising linguistically rich material; **lexically rich narratives with high acoustic-phonetic repetition drove faster error reduction even when the recordings were noisy**.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11631",
@@ -2830,10 +2789,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Ambiguous or underspecified user queries push large language models into vague or wrong answers, but teaching a model when to ask a clarifying question and what to ask about has generally required human-annotated preference data. `CLAIM` derives that signal automatically instead, quantifying query ambiguity as the entropy of disagreement among answers sampled from multiple models, then combining that estimate with semantic clustering and reasoning-based judgments to synthesise training data. A single clarification-decision model is trained on this data with supervised fine-tuning followed by group-relative policy optimization (`GRPO`), and the authors report that **it learns stable, generalizable clarification strategies with no manually labeled data at all**.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11632",
@@ -2851,10 +2809,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Long-running agents accumulate versioned state, but simply retaining that state does not say which version is authoritative, leaving room for stale overwrites, unaudited exposure of data, and agents granting themselves privileges. The proposed Continuity Kernel is a control plane that separates evaluating a candidate change from committing it: untrusted models, tools, and background workers propose typed changes against an exact predecessor state, and a short activation transaction rechecks ownership, prior authority, freshness, and effect uniqueness before recording one of four outcomes, with only a commit advancing the branch head. A bounded executable model of the protocol was **exhaustively checked over 2,808,230 reachable states and 5,526,474 transitions with zero invariant violations**.",
+      "topic": "agents",
+      "interest": 2
     },
     {
       "id": "2608.11649",
@@ -2870,10 +2827,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "With users consulting chatbots about politics during election periods, the question of which parties and politicians those systems appear to favour has practical stakes. The authors build a reproducible auditing framework that prompts several large language models to evaluate political parties and leaders against nine criteria, deliberately measuring observable behaviour — consistency across repeated evaluations, disagreement between models, refusal rates, and sensitivity to how the prompt is worded — rather than trying to infer any underlying belief. The framework also varies the persona the model is told to adopt, and is **demonstrated end to end as a case study of Italian parties and leaders**.",
+      "topic": "safety-and-alignment",
+      "interest": 3
     },
     {
       "id": "2608.11650",
@@ -2894,10 +2850,9 @@
       "announce_type": "cross",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Zero-shot text-to-speech systems usually need a transcript of the reference audio at inference time, which rules out cloning voices from the untranscribed in-the-wild recordings that dominate cross-lingual use. `Confucius4-TTS` removes that dependency with a two-stage design: a language-model-based text-to-semantic module that pulls timbre from self-supervised speech representations via a learnable speaker encoder, and a conditional flow-matching semantic-to-acoustic module that turns predicted semantic tokens into mel-spectrograms. Covering 14 languages, it reaches **an average word error rate of 3.73% across six directions on the `CV3-Eval` cross-lingual benchmark** and takes the best average human-evaluation rank on an internal cross-lingual set against recent open-source and commercial systems, with code and checkpoints released.",
+      "topic": "applications",
+      "interest": 3
     },
     {
       "id": "2608.11655",
@@ -2919,10 +2874,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Multimodal large language models keep video costs down by sampling frames uniformly and sparsely, which throws away the transitions between frames that reasoning about movement, collisions, and cause-and-effect depends on. `Motion-as-Prompt` recovers dense point trajectories from the full video, picks the most motion-informative frames, and draws the trajectories accumulated between consecutive sampled frames onto the images themselves, so displacement and direction changes become visible to a frozen model with no training or architecture change. On `CLEVRER` and `Something-Something-v2` it raises average motion-reasoning accuracy by **4.2 and 8.9 points respectively for `GPT-5.5`**, without hurting performance on non-motion questions.",
+      "topic": "multimodal",
+      "interest": 3
     },
     {
       "id": "2608.11657",
@@ -2940,10 +2894,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Borrowing from artificial life, `Semantic Lenia` reframes language model inference as a continuous dynamical system evolving in logit space rather than a sequence of independent decoding decisions. A non-linear homeostatic feedback loop balances semantic attraction against syntactic repulsion, and the authors report the emergence of what they call autonomous semantic solitons — persistent macroscopic structures that keep generation from collapsing into repetition. Parameter sweeps map **a narrow 'habitable ridge' where the applied steering force cancels the model's intrinsic syntactic inertia**, which the authors say holds trajectories at the edge of chaos and produces large abductive leaps without structural collapse.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.11658",
@@ -2962,10 +2915,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "When a deployed reinforcement learning system's objective changes — a new reward for traffic signals or fleet dispatch — successor features with generalized policy improvement let a single agent recombine its library of old policies into a new one that is provably no worse than any library member. Multi-agent practice copies the recipe by letting each agent recombine independently, and the authors prove **this per-agent composition can yield joint behaviour strictly worse than every policy in the library**, because recombining teammates changes each agent's environment and invalidates the values it relies on. Since the only unconditionally safe fixed alternative, synchronized composition, cannot assign different goals to different agents, they propose `MA-USFA`, which pairs universal successor feature approximators conditioned on teammates' objectives with an upper-level composer that picks each agent's library entry and supplies the cross-agent correction; it is trained once over the objective distribution and used at deployment with no per-task adaptation.",
+      "topic": "reinforcement-learning",
+      "interest": 3
     },
     {
       "id": "2608.11660",
@@ -2993,10 +2945,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Knowledge editing keeps a language model current by rewriting specific facts, and recent work has moved from triples to unstructured edits where the update is a free-form passage stating several facts at once. Existing editors get the passage in but not usable: the model can recite it yet cannot answer atomic questions about its individual facts or chain them into multi-hop reasoning, a shortfall the authors call a lack of composability and attribute to treating the fixed passage as the only learning signal. `HPSE` instead distills from the same model's own privileged in-context state, and because a pre-edit model's rollouts rarely cover genuinely new knowledge, it builds a hybrid rollout that inserts missing facts onto the student's own trajectory exactly where coverage fails while staying on-policy elsewhere — **giving plug-and-play gains across four model backbones and two existing editors**, with theory explaining the advantage over pure on-policy distillation.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11661",
@@ -3014,10 +2965,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Networks that score a pair of inputs as the inner product of two separately encoded vectors have been reinvented across operator learning, bipartite matching, retrieval, and contrastive vision-language training, with no shared theory for how many interaction modes to keep, how to normalize, or when the design will fail. The authors define a class of functions of low interaction rank whose complexity is captured by an interaction spectrum: approximation error splits into spectral truncation plus encoder realization, sample complexity scales with the sum rather than the product of the two encoder complexities, and spectral decay gives a criterion for when the architecture is appropriate. The framework also exposes a gauge symmetry that leaves learned coordinates arbitrary, and shows **normalization is gauge fixing — whitening pins the interaction modes down to permutation and sign**, which experiments confirm by relating independently trained `CLIP` models through a single rotation whose removal exposes interpretable concept axes.",
+      "topic": "theory",
+      "interest": 3
     },
     {
       "id": "2608.11669",
@@ -3043,10 +2993,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Post-training on tasks without a checkable answer increasingly uses rubrics graded by a language model judge, but a rubric is an incomplete proxy for quality and a policy optimized against it long enough learns to exploit the gap. Training `Qwen3-8B` with Group Relative Policy Optimization on medical and science rubrics and scoring out-of-distribution benchmarks with both the training judge and a stronger gold judge, the authors watch the two curves separate — **the gold score peaks and then drops by 3 points on `HealthBench-Hard` and 22 points on `ResearchQA` while the training score keeps rising**, a pattern fixed judge bias cannot explain. Their fix, Rubric Dropout, randomly removes a subset of criteria before computing each step's reward (shared across a rollout group so group-relative advantages stay comparable, with evaluation always on the full rubric), lifting out-of-distribution gold scores at every matched checkpoint with a broad 30-50% sweet spot, while reweighting criteria by usefulness did worse than no intervention.",
+      "topic": "reinforcement-learning",
+      "interest": 4
     },
     {
       "id": "2608.11674",
@@ -3069,10 +3018,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "On-policy rollout methods such as `GRPO` dominate language model post-training but bring instability, loss of unrelated capabilities, and steadily inflating response lengths. The authors introduce Principal-Subspace Overlap, a dimension-corrected measure of how much each individual rollout update aligns with the dominant singular subspaces of the pretrained weights, and find that although average overlap is low, **transient spikes in overlap tend to precede performance degradation**. `GCPO` prevents those excursions structurally by applying hard bilateral orthogonal projections that confine updates to the complementary subspaces; across math, code, and tool-use tasks on `Qwen3-8B` and `GLM4-9B` it beats `GRPO`, `DAPO`, and `GSPO` by up to 2.37 points over the strongest baseline while preserving general capabilities, removing length inflation, and stabilizing policy entropy.",
+      "topic": "reinforcement-learning",
+      "interest": 3
     },
     {
       "id": "2608.11676",
@@ -3093,10 +3041,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Multi-agent systems built from different model families avoid the redundant reasoning of identical agents, but they can only communicate through text, discarding the sender's internal representations, since latent transfer has required matching architectures. The authors identify an entity grounding problem in cross-architecture bridges: rare tokens get compressed away in the continuous bottleneck so entity identity is lost, leaving a bridge-only F1 around 30%. `XBRIDGE` fixes this without decoding, mapping the sender's context tokens into the receiver's vocabulary as discrete anchors while a latent enrichment bridge lets the receiver query the sender's hidden states, so self-attention ties contextual signal back to specific entities. Across `Llama`, `Qwen`, and `Mistral` pairs in both directions it **beats text communication on all seven benchmarks with 11x lower latency**, using 264M trainable parameters, or 3.8% of the receiver.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.11679",
@@ -3117,10 +3064,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Digital twins flag anomalies in cyber-physical systems, but the volume and rawness of sensor data make the flags hard for operators to interpret. `AgenticTwin` wraps a digital-twin anomaly classifier in an agentic language model layer that grounds its explanations in the classifier's outputs and lets operators ask natural-language questions about what happened. The authors also build an evaluation pipeline by injecting synthetic anomalies into a real weather sensor dataset so operator queries can be generated in a controlled way, and test lightweight open-source models for on-site deployment; **structured collaboration between agents plus knowledge-grounded reasoning improved diagnosis, contextual retrieval, and suggested mitigations** across the anomaly scenarios tested.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.11681",
@@ -3140,10 +3086,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Open-vocabulary instance segmentation and open-set panoptic segmentation aim to label both known and unseen object categories without exhaustive human masks, but current methods inherit noisy pseudo-masks, weak grounding between images and text, and trouble with synonyms and out-of-vocabulary words. The proposed pipeline generates its supervision automatically, using `Grounded SAM` for pseudo-masks, `LLaVA` for descriptive captions, and `CLIP` for filtering semantically aligned synonym sets, then trains with three objectives: a grounding loss extended to visually grounded synonyms, a semantic consistency loss, and a caption reconstruction loss. On `COCO`, the method **outperforms prior state of the art on both the instance and panoptic open-vocabulary benchmarks under this target-vocabulary-assisted protocol**.",
+      "topic": "vision",
+      "interest": 2
     },
     {
       "id": "2608.11683",
@@ -3166,10 +3111,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Finance benchmarks mostly test data extraction, which frontier models have largely saturated, and reference-matching or generic judge scoring cannot grade the long open-ended answers a real analyst query produces. `FrontierFinance` is an open benchmark of 220 expert-written queries and 11,543 source-attributed rubrics covering six stages of the investor workflow, run under a common harness limited to publicly available data. Evaluation shows the tool harness matters as much as the model: Samaya's in-house system leads at 56.0% against `Claude Fable 5` at 49.2% for roughly 2.2x less cost, and the best open-weight model, `Kimi K3` at 46.4%, nearly matches the best proprietary model at 4.5x lower cost. **Screening and discovery, and sector, industry and macro analysis remain unsolved, with the best systems reaching only 33% and 39%**; the dataset and grading code are public.",
+      "topic": "agents",
+      "interest": 4
     },
     {
       "id": "2608.11688",
@@ -3189,10 +3133,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Mixture-of-Experts models suit edge devices because only a fraction of parameters activate per token, but expert weights usually sit in off-chip memory, so loading them lands on the critical path and memory rather than compute becomes the limit. `APEX` hides that latency with a lightweight prefetch router that predicts likely experts before the attention block runs and uses a learned confidence model to decide how many extra experts to fetch, reaching **over 99% overlap accuracy versus fixed top-k prefetching**. It offers a correctness-preserving mode that keeps exact routing semantics — cutting per-token latency by up to 26% and improving energy-delay product by up to 41% over prior work — and a stall-free mode that computes with whatever experts are already available for further gains at negligible accuracy cost.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.11691",
@@ -3214,10 +3157,9 @@
       "announce_type": "cross",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Reinforcement learning post-training gives multimodal reasoning models exploratory chains of thought, and the authors show this creates a privacy hole that existing unlearning methods miss: a fact scrubbed from the final answer can still surface in the reasoning trace, far more often in natively RL-trained models than in their non-reasoning bases. They trace this to a distinctive token-level entropy signature that marks sensitive content during RL-induced exploration and is largely absent from base models. `LEMUR` exploits that signal without any training, using entropy dynamics at inference time to detect when sensitive reasoning starts and stops, then rerouting the trajectory by replacing committed tokens with sanitized probability-weighted embeddings re-grounded in the input image; it **suppresses leakage in both the reasoning trace and the answer better than existing unlearning methods** while preserving unrelated utility and fluency.",
+      "topic": "safety-and-alignment",
+      "interest": 3
     },
     {
       "id": "2608.11692",
@@ -3241,10 +3183,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Automated parcel sorting requires planning jointly over cameras that see spatially separate scenes, a setting the authors formalize as Joint Multi-Scene Understanding, and off-the-shelf vision-language models struggle with it because cross-scene training data is scarce and long visual contexts disperse attention. `HUGIN` combines endogenous data augmentation, which recombines verified atomic facts under operating constraints to manufacture supervision, with global context ranking, which pushes the instruction representation to align more with the full visual context than with any partial view. On `SortingBench`, a new dataset built from four real sorting-system layouts, it improves five open vision-language models — **raising `Qwen3-VL-8B` accuracy from 63.6% to 78.8%** — and deployment tests covering more than 15,000 packages support practical viability.",
+      "topic": "robotics",
+      "interest": 2
     },
     {
       "id": "2608.11694",
@@ -3264,10 +3205,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Every benchmark score rests on one particular phrasing of each problem, treated as a stand-in for all the ways that problem could be asked. `BenchDrift` generates meaning-preserving rewordings along linguistic, referential, pragmatic, and structural axes and measures how often correctness flips in each direction, finding substantial two-way drift across eight models and `GSM8K`, `MMLU`, and `MATH-Hard`. Two results stand out: **sensitivity to phrasing does not shrink as models improve but reverses sign, with weak models gaining more from rewording than they lose while strong models lose far more than they gain**, so the top scorers on a benchmark are the ones most dependent on the exact wording they were handed. Models also largely agree on which rewordings are costly, indicating the fragility belongs to the rephrasing rather than the model, and rewordings break answers the model had been confident about whether they make the problem shorter or longer.",
+      "topic": "llms",
+      "interest": 4
     },
     {
       "id": "2608.11698",
@@ -5186,10 +5126,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Natural language processing work on how texts encode viewpoints draws on a scattered vocabulary — stance, sentiment, framing, argumentation — without a clear account of how these operative concepts relate to one another. A review of the area defines a set of distinguishing properties (such as how explicit, subjective, and target-bound each concept is) and uses them to organize the concepts into **a single hierarchy arranged linearly along one axis**. The resulting map is offered as a practical guide for choosing an operationalization of perspective that matches a given research objective.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.12121",
@@ -5213,10 +5152,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Retrieval-Augmented Generation (RAG) systems repeatedly prefill the same retrieved text chunks, and Position-Independent Caching (PIC), which reuses precomputed Key-Value (KV) state regardless of position, is still bottlenecked by the sheer number of text tokens. Rendering chunks as images compresses them into far fewer visual tokens but degrades answer quality more sharply, because independently compiled caches lose shared context and visual compression discards fine-grained text. `QV-PIC` compiles visual caches offline under the model's native chat-template prefix and, at serving time, keeps global context at low resolution while restoring query-relevant regions at high resolution under a budget set by cumulative relevance scores. Across six tasks it gains **21.6 F1 points over vanilla rendered-image PIC**, exceeds optimized text PIC by 2.58 F1 while cutting time-to-first-token (TTFT) by 17.2%, and reduces TTFT by 83.8% versus full prefill.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.12123",
@@ -5234,10 +5172,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Services built on language-model agents spend much of their time on small deterministic control steps between model and tool calls — routing an outcome, updating state, emitting the next effect — and it is unclear whether enough of these steps are concurrently ready to justify running them on GPU. The work formalizes a \"ready-cohort\" boundary with a fixed-partition share, an exact offline share computed by dynamic programming, and a local upper bound, then measures them on a replayed 851-session trace at 100,000 target active sessions with a 50 ms launch deadline, where exact packing reaches 43.00% against 30.19% for fixed windows and **recovers 81.83% of the concurrency lost at window boundaries**. A separate mechanism study shows that keeping a GPU-computed binary route decision on device, rather than returning four bytes to the host and redispatching, was faster in all 36 tested configurations, with median speedups of 1.19x to 2.39x.",
+      "topic": "agents",
+      "interest": 2
     },
     {
       "id": "2608.12125",
@@ -5260,10 +5197,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "When language-model agents pursuing user goals meet each other in strategic settings, theory suggests that knowing an opponent reasons similarly can unlock cooperation in games like the Prisoner's Dilemma. A new evaluation framework supplies agents with graded similarity signals about their counterpart and measures how cooperation responds across payoff structures and prompt framings. Models diverge sharply in how they use the signal, the dataset used to compute similarity turns out to matter little, and **models systematically judge another model's chain-of-thought reasoning to be highly similar to their own**. A behavioral game-theoretic model fitted to the observed reasoning supports cooperative equilibria once similarity scores are high enough.",
+      "topic": "agents",
+      "interest": 3
     },
     {
       "id": "2608.12129",
@@ -5285,10 +5221,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Dense retrieval handles structured constraints and multi-hop questions poorly, while graph-based retrieval fixes this at the cost of building and maintaining a global knowledge graph that fragments meaning into triples. `SAG` instead indexes each chunk as a semantically complete event paired with its entities, forming a latent hyperedge that keeps n-ary relations intact, and at query time joins chunks on shared entities to assemble a query-scoped neighborhood whose evidence units are still the original chunks. On `HotpotQA`, `2WikiMultiHopQA`, and `MuSiQue` it leads on both retrieval and end-to-end question answering, with the margin widening as reasoning chains lengthen — reaching **80.36% Recall@5 on MuSiQue, 11.52 points above the strongest baseline**.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.12133",
@@ -5307,10 +5242,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Enterprise guideline documents mix narrative text, complex tables, and embedded images, and current language- and vision-model pipelines hallucinate content, mangle table structure, and stop at extraction rather than covering validation and downstream artifact creation, leaving 2-3 days of manual work per document. `GUIDE` is a governed multi-agent framework built around a shared versioned rule store, schema-validated contracts between agents, and end-to-end provenance, with six agents handling parsing, vision-language model (VLM) extraction, consistency checking, evaluation, human-in-the-loop escalation, and persona-tailored synthesis. Across 120 real enterprise documents it succeeded on 96%, extracted 3,896 rules of which 71.4% were auto-approved, produced 812 deployment-ready artifacts, and **cut turnaround to 40-125 minutes per document**.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.12134",
@@ -5329,10 +5263,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Maximizing a nonnegative submodular function under a general matroid constraint is studied in the setting where the algorithm sees only an adversarially controlled value oracle that may deviate from the true function by up to a fixed amount at every set. The main result shows that the `Spiteful Greedy Swap Poisson Process` keeps its limiting approximation factors — 1/e for non-monotone and 1-1/e for monotone objectives — **without any change to its Poisson intensity, single-element exchange rule, or spiteful drop step**, losing only an additive term proportional to the perturbation times the rank. Plugging this robust offline routine into an offline-to-online reduction yields full-bandit combinatorial multi-armed bandit algorithms for matroid-constrained submodular rewards with those same approximation factors and regret Õ(n^(1/5) k^(4/5) T^(4/5)).",
+      "topic": "theory",
+      "interest": 2
     },
     {
       "id": "2608.12138",
@@ -5358,10 +5291,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Reports that general-purpose frontier models now match specialized clinical AI rest on a narrow set of systems and benchmarks written mostly for high-income settings. `VITA`, a retrieval-augmented generation system drawing on curated disease guidelines, India-specific antimicrobial resistance data, national formulary constraints, and resource-limited care protocols, was scored on 4,023 English `HealthBench` questions by a `GPT-4.1` judge, where it placed first with 51.9% of possible rubric points ahead of `GPT-5.4` at 46.1% and `Gemini 3.1 Pro` at 42.6%. Re-running a 500-question subset against current-generation models with a lineage-neutral open-weight judge (`DeepSeek-V4-Pro`) **narrowed the gap to statistical parity with `GPT-5.5`** on mean per-question score, though VITA still led on points-weighted score, accuracy, and completeness while scoring lower on communication.",
+      "topic": "applications",
+      "interest": 3
     },
     {
       "id": "2608.12146",
@@ -5382,10 +5314,9 @@
       "announce_type": "cross",
       "feed_category": "cs.LG",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Reinforcement learning on Mixture-of-Experts (MoE) models has two coupled load-balancing problems — how sequences are composed determines dense attention work per microbatch, while token routing determines sparse expert work — and fixing one alone just moves the bottleneck. `RoutePack` exploits the fact that rollout-time routing replay reveals each sample's length and layer-wise expert demand before its training step: it first places experts per MoE layer from aggregate demand, then packs samples into the fewest feasible token-capped rows and searches data-parallel layouts with an objective that combines an attention cost proxy with per-layer expert-parallel rank peaks, minimizing the slowest shard. On `Ling-3.0-Tiny` and `Ling-3.0-Flash`, rerouting and routing-aware packing together raise measured token throughput by **8.85% and 14.89%** over baseline without replicating experts or changing existing MoE kernels.",
+      "topic": "reinforcement-learning",
+      "interest": 2
     },
     {
       "id": "2608.12149",
@@ -5411,10 +5342,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul",
+      "summary": "Massive activations — the extreme hidden-state outliers known from full-attention transformers — are characterized for the first time in hybrid linear attention (HLA) models that interleave linear and full attention layers, revealing two architecture-aligned shapes: spikes that appear immediately before full attention layers, and plateaus that persist across the linear attention layers in between. **As full attention becomes denser, consecutive spikes link up through the plateaus and recover the stable pattern seen in full-attention models**, a recurrence confirmed across five linear attention architectures, six hybridization settings, five data domains, and open models from 1.2B to 397B parameters. Controlled pretraining of gated DeltaNet hybrids up to 1.3B shows both shapes emerge early and respond asymmetrically to output gating, and an outlier lifecycle analysis attributes spikes to a localized write-sink-cancel process and plateaus to delayed cancellation.",
+      "topic": "llms",
+      "interest": 3,
       "hf_upvotes": 13,
       "highlight": true,
       "highlight_summary": "Hybrid linear attention models interleave cheap recurrent layers with a few full attention layers, but nobody had characterized how that layout reshapes the extreme hidden-state outliers known as massive activations. The study finds that these activations organize themselves around attention placement: they spike in the layer immediately preceding every full attention layer, and as full attention grows denser they stop decaying in between, merging into sustained plateaus that converge on the flat profile of a pure Transformer.\n\n- Because magnitude ranking becomes unreliable under hybridization — the top-activated token switches between adjacent layers far more often than in full attention models — the authors anchor tracking to a consensus attention sink token, averaging attention mass across all full attention layers and heads, then trace that fixed token's peak activation through depth.\n- **Pre-attention spikes** are near-universal: sink–spike alignment rates hit **99.4–100%** macro-averaged across `RetNet`, `HGRN`, `GLA`, `DeltaNet`, and `GDN` at both 340M and 1.3B, holding across `WikiText-103`, `Scientific Papers`, `GSM8K`, `CodeSearchNet`, and `FLORES-200`.\n- **Inter-spike retention climbs sharply with attention density** — for `GDN` at 1.3B it goes from **18.4%** at a 24-layer-per-attention 12:1 ratio to **26.6%** at 6:1 and **77.8%** at 3:1 — and the same alignment appears in open-source hybrids from `Kimi Linear`, `Qwen3.5`, `Nemotron-H`, and `Zamba2` spanning **1.2B to 397B** parameters, including state-space rather than linear-attention mixers.\n- Controlled pretraining of 24-layer `GDN` hybrids at 340M and 1.3B shows the spike is already visible after **1B tokens** and tracks whatever depth the full attention layer is placed at, while output gating is asymmetric: gating full attention strongly attenuates both morphologies without erasing their layerwise structure, whereas removing `GDN`'s native output gates only modestly amplifies them.\n- The proposed mechanism is a single write–sink–cancel lifecycle differing only in cancellation timing — the pre-attention layer writes a large signed outlier, the sink token absorbs attention, and an opposite-signed update cancels it either promptly (spike) or after several layers (plateau) — though this rests on fixed-coordinate tracing of representative cases rather than a causal intervention, and the paper leaves open both what regulates cancellation timing and whether the two regimes serve different computational roles."
@@ -5435,10 +5365,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Standard leaderboards implicitly assume a model's rank is stable regardless of how many tokens it is allowed to generate. Sweeping the generation budget across seven levels from 64 to 4,096 tokens for four models on three reasoning benchmarks — 56,476 inferences in total — shows 3-19% of items where accuracy actually falls as budget grows even after controlling for truncation, and **model rankings reverse across budgets on every benchmark**. Oracle analysis finds up to 27.8 percentage points of complementarity between models, largest at tight budgets, while a budget-aware router recovers 14.1% of that gap cross-domain and budget features help within a domain but transfer poorly.",
+      "topic": "llms",
+      "interest": 3
     },
     {
       "id": "2608.12166",
@@ -5460,10 +5389,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Public-sector algorithm registers are promoted as transparency instruments, but it is unclear how well they represent the wider sociotechnical systems around an algorithm or support accountability. A case study of a Dutch municipal register entry for a business-rule-engine tool that helps caseworkers assess welfare benefits eligibility combined interviews, surveys, and participatory system mapping workshops with municipal staff, civil society groups, and ombudsmen, feeding the resulting maps into a `System-Theoretic Process Analysis` (STPA). Stakeholder input surfaced **hazards invisible from the register alone**, including wrongful denial of benefits, gradual performance deterioration, and inability to contest wrongful decisions, which the authors use to argue that system safety analysis in this domain is inherently political.",
+      "topic": "safety-and-alignment",
+      "interest": 2
     },
     {
       "id": "2608.12187",
@@ -5484,10 +5412,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Transformer approaches to monocular 3D human pose estimation typically run spatial and temporal reasoning as separate stages, compressing per-frame structure before motion is modeled. `HSTGFormer` recasts the problem as localized coupled graph aggregation over joint-time nodes: a Hyper Spatial-Temporal Graph extends each frame's skeleton graph into its temporal neighborhood so reasoning stays structure-aware and local, an adaptive dual-scale temporal graph captures joint-specific short- and long-range dependencies, and a lightweight node-wise module fuses the two. On `Human3.6M` and `MPI-INF-3DHP` the model reports **strong accuracy at high computational efficiency** relative to prior transformer baselines.",
+      "topic": "vision",
+      "interest": 2
     },
     {
       "id": "2608.12190",
@@ -5511,10 +5438,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Cloud intrusion detection is framed as a sequential decision problem so that detection and response can adapt as attacks change, using a Deep Q-Network trained on `CICIDS2017` and validated externally on `UNSW-NB15` after preprocessing and feature engineering. Against decision tree, support vector machine, random forest, `XGBoost`, and multilayer perceptron baselines, the agent reports **99.72% accuracy** with a 0.31% false positive rate, 15 ms detection latency, and a 99.54% attack mitigation rate. The authors present this as evidence that reinforcement learning can support autonomous, real-time cloud defense.",
+      "topic": "applications",
+      "interest": 1
     },
     {
       "id": "2608.12192",
@@ -5537,10 +5463,9 @@
       "announce_type": "new",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Protein structure prediction models still fail on some targets, and while external biological oracles can flag and correct those failures, oracle calls are expensive enough that how a fixed budget is spent becomes the design question. Four guidance strategies — `FK-steering`, `DPO`, Best K-of-N sampling, and `Optimisation Over Outputs` (O3), which runs off-the-shelf optimizers inside a generative model's latent subspace and is extended here to structure prediction — are compared under matched budgets on calmodulin (`1CLL`) and E. coli aspartate transcarbamoylase (`9EEH`). **No method dominates across all budgets and oracles**: O3 is strongest when the budget is small, while FK-steering and DPO overtake it as the budget grows, which the authors distil into budget-dependent recommendations for practitioners.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.12194",
@@ -5563,10 +5488,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Kolmogorov-Arnold Networks (KANs) swap scalar weights for learnable univariate functions, but giving every connection its own function creates heavy parameter redundancy. `HYDRA` embeds vector-valued inputs into the Poincaré ball, performs KAN-style spline updates in tangent space, and shares functional transformations across hidden dimensions through a low-rank prototype block, with radius control preventing saturation near the boundary. Across eight benchmark datasets it matches or beats standard KANs while being **substantially more parameter-efficient**, and the hyperbolic radial coordinate provides an interpretable structure on learned representations.",
+      "topic": "other",
+      "interest": 2
     },
     {
       "id": "2608.12196",
@@ -5585,10 +5509,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Purely data-driven medical image segmentation ignores mathematical structure present in the images themselves. `M-Net` injects three priors into a `U-Net`: a continuous spectral feature from the condition number of centered local pixel matrices as a differentiable measure of texture ill-conditioning, divergence and a discrete curl-like boundary-irregularity operator computed on image gradient fields, and a Math-Attention Gate that adaptively fuses these with convolutional features at the skip connections. On `LiTS`, `KiTS`, and `BraTS` it reaches Dice scores of 78.42%, 76.15%, and 83.67%, **improving on the U-Net baseline by 12.37% for liver segmentation**, with ablations crediting 2.14% to the continuous condition-number feature over a binary invertibility flag and 1.45% to the gate over plain concatenation.",
+      "topic": "vision",
+      "interest": 2
     },
     {
       "id": "2608.12197",
@@ -5610,10 +5533,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Language models are being folded into circuit design workflows, but their reliability on the simulator-facing task of reading and editing SPICE netlists is rarely measured apart from high-level design reasoning, even though a netlist encodes a structured circuit through topology and parameters rather than free text. `NetlistBench` supplies 2,342 cases across 24 task families spanning parameter and connectivity recognition and editing, hierarchical operations, equivalence judgment, and long-horizon compound edits, all graded by a deterministic structure-aware oracle. Across six non-reasoning models, accuracy tracks structural complexity closely: simple local edits land at 96-100% while **device addition falls to 41-83% and equivalence judgment to 49-90%**, and turning on reasoning lifts weaker models without eliminating structure-preservation failures, which still worsen as the edit horizon lengthens.",
+      "topic": "applications",
+      "interest": 2
     },
     {
       "id": "2608.12198",
@@ -5634,10 +5556,9 @@
       "announce_type": "cross",
       "feed_category": "cs.AI",
       "announced": "2026-08-14",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul"
+      "summary": "Learned motion planners handle complex traffic scenes well but their opacity complicates explainability and safety assurance for automated vehicles. The proposed hybrid architecture keeps a deep neural network for interpreting scenes and proposing driving behavior, then routes that proposal through an optimization-based supervision layer that checks it and enforces explicit drivability and safety constraints deterministically. The learned planner's behavior is assessed in open-loop studies on real-world urban data, and the paper reports system-integration details for stable closed-loop operation plus **results from actual deployment on the authors' research vehicle**.",
+      "topic": "robotics",
+      "interest": 3
     },
     {
       "id": "2608.12218",
@@ -5656,10 +5577,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "claude -p exited 1: Permission deny rule (../../../../.claude/settings.json): Write(**/.env*) is not matched by file permission checks — only Edit(path) rules are. Use Edit(**/.env*) instead (Edit rul",
+      "summary": "Training with ever-longer contexts is usually assumed to be harmless or helpful, but abundant in-context evidence may remove the incentive to store that information in weights, a tension named the Information Abundance Paradox. Pretraining experiments with long documents show that widening the context window improves language modeling, natural language understanding, and closed-book multiple-choice question answering **only up to an intermediate optimum, after which all three consistently decline**; in supervised fine-tuning, more task-relevant context at train time helps when supporting context is present at test time but reduces robustness when it is absent or misleading. Mechanistically, informative context shifts gradient pressure away from feed-forward layers, which are associated with parametric knowledge, toward attention, and causal interventions confirm this shift increases reliance on context at inference — suggesting that scaling toward near-infinite context is not simply a matter of supplying more high-quality long data.",
+      "topic": "llms",
+      "interest": 4,
       "highlight": true,
       "highlight_summary": "**Overview**\n\nLong-context training is usually assumed to be a free win — more evidence in the window can only help — and when it underperforms, the blame falls on scarce high-quality long documents. This work argues the context window instead changes *what* the model learns: when task-relevant information is abundant in the training context, the model can lower its loss by reading it rather than encoding it in weights, shifting from parametric internalization to contextualization.\n\n- Under a token- and update-matched pretraining sweep on 10B `Project Gutenberg` tokens across four scales (**20M to 750M** parameters) with context windows from 512 to 32768, downstream performance traces an **inverted U** — `SuperGLUE` and closed-book MCQA peak near **2048 tokens** and language-modeling loss bottoms out near **8192** — with the degradation past the optimum persisting at every model size, so added capacity does not rescue it.\n- Fine-tuning `Qwen3` models from **0.6B to 14B** with `LoRA` on four `MMLU-Pro` domains under a fixed eight-document budget, while varying how many of those documents come from the target domain (k = 0, 4, 8), produces what the authors call **context addiction**: more relevant training context raises accuracy when supporting context is present at test time but lowers no-context accuracy and widens the gap under deliberately conflicting context.\n- The theoretical account is an achievability result — because a shorter window is a projection of a longer one, any short-context predictor can be simulated with the longer input, so the minimum task information that must live in the weights to hit a given risk threshold is **monotonically non-increasing in context length**.\n- Mechanistically, longer or more relevant training context lowers the **feed-forward-to-attention gradient norm ratio** (significant in **19 of 20** fine-tuning model-domain comparisons and at every pretraining scale) and raises inference-time attention mass on context tokens, concentrated in middle layers; module-restricted fine-tuning supplies the causal leg, with feed-forward-only updates improving no-context robustness and attention-only updates buying supporting-context accuracy at the cost of conflict vulnerability.\n- Synthetic pretraining on four rule-learning tasks shows the effect is selective rather than universal — the supporting-conflicting gap grows for bitwise and string operations, where average training gradient norm falls, but stays flat for mod10 arithmetic and the Caesar cipher — supporting the reading that context addiction appears only when demonstrations offer a lower-complexity optimization path than internalizing the rule.\n\nThe main limitation the authors name is scale: pretraining tops out at **750M** parameters, leaving open where the inflection points sit for frontier-size models, larger data, and more compute."
     },
@@ -5975,10 +5895,9 @@
       "announce_type": "new",
       "feed_category": "cs.CL",
       "announced": "2026-08-13",
-      "summary": null,
-      "topic": null,
-      "interest": null,
-      "summary_error": "missing_from_response"
+      "summary": "Access gaps for speakers of under-resourced languages are traced not to model training but to the infrastructure that precedes it: training corpora, tokenization schemes, evaluation benchmarks, and deployment assumptions. Using Bengali and AI-assisted education in low-connectivity settings as the case study, the analysis identifies four compounding failures — Bengali makes up under 0.5% of global web content despite its speakers being nearly 4% of the world's population, major multilingual corpora show a **67:1 English-to-Bengali training-token deficit**, the language's alphasyllabary script incurs a tokenization penalty through higher token fertility, and rural internet penetration sits at 36.5% versus 71.4% in urban areas. The authors argue that dataset scarcity should be treated as a structural barrier rooted in resource-allocation and design defaults rather than an isolated technical gap, and propose offline-first deployment as an equity-oriented infrastructure strategy.",
+      "topic": "llms",
+      "interest": 2
     },
     {
       "id": "2608.12282",
