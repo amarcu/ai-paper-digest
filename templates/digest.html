@@ -2,16 +2,17 @@
 {% block title %}AI Paper Digest — {{ day.date }}{% endblock %}
 {% block content %}
   <header class="masthead">
-    <h1>{{ day.date_human }}</h1>
-    <p class="day-meta">
-      <span class="stat">{{ day.paper_count }} papers</span>
-      <span class="stat">{{ day.categories | join(" · ") }}</span>
-      {% if prev_date %}<a class="stat" href="{{ root }}archive/{{ prev_date }}.html">&larr; {{ prev_date }}</a>{% endif %}
-      {% if next_date %}<a class="stat" href="{{ root }}archive/{{ next_date }}.html">{{ next_date }} &rarr;</a>{% endif %}
-    </p>
+    <div class="masthead-info">
+      <h1>{{ day.date_human }}</h1>
+      <p class="day-meta">
+        <span class="stat">{{ day.paper_count }} papers</span>
+        <span class="stat">{{ day.categories | join(" · ") }}</span>
+        {% if prev_date %}<a class="stat" href="{{ root }}archive/{{ prev_date }}.html">&larr; {{ prev_date }}</a>{% endif %}
+        {% if next_date %}<a class="stat" href="{{ root }}archive/{{ next_date }}.html">{{ next_date }} &rarr;</a>{% endif %}
+      </p>
+    </div>
+    {% include "calendar.html" %}
   </header>
-
-  {% include "calendar.html" %}
 
   <nav class="topic-nav" aria-label="Sections">
     {% if highlights %}

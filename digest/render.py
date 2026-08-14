@@ -164,6 +164,16 @@ def _build_calendar(days: list[dict], today: date_type) -> dict:
                 "label": (f"{count} papers · " if count else "") + day.strftime("%b %-d"),
             })
         weeks.append(cells)
+
+    # Labels overflow their 12px column; drop an earlier label when the next
+    # month starts within two columns so they can't overlap ("MayJun").
+    last = None
+    for index, label in enumerate(month_labels):
+        if not label:
+            continue
+        if last is not None and index - last < 3:
+            month_labels[last] = ""
+        last = index
     return {"weeks": weeks, "month_labels": month_labels}
 
 

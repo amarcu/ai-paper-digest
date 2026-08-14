@@ -78,8 +78,15 @@ a:focus-visible, summary:focus-visible {
   max-width: 60ch;
 }
 
-/* Masthead */
-.masthead { padding: 1.8rem 0 0.4rem; }
+/* Masthead: date and stats left, activity calendar right, one aligned band */
+.masthead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.2rem 2.5rem;
+  padding: 1.8rem 0 0.9rem;
+}
 .masthead h1 {
   font-family: var(--serif);
   font-weight: 600;
@@ -101,7 +108,7 @@ a:focus-visible, summary:focus-visible {
 .day-meta a.stat { color: var(--accent); }
 
 /* Contribution-style calendar */
-.cal { margin: 0.9rem 0 0.3rem; overflow-x: auto; padding-bottom: 2px; }
+.cal { margin: 0 0 0.2rem; max-width: 100%; overflow-x: auto; padding-bottom: 2px; }
 .cal-months, .cal-grid {
   display: grid;
   grid-auto-flow: column;
@@ -125,6 +132,7 @@ a:focus-visible, summary:focus-visible {
 }
 .cal-cell.future { visibility: hidden; }
 a.cal-cell:hover { outline: 1px solid var(--accent); }
+.cal-cell.current { outline: 2px solid var(--accent); outline-offset: 1px; }
 .cal-cell.l1 { background: color-mix(in srgb, var(--accent) 22%, var(--card)); }
 .cal-cell.l2 { background: color-mix(in srgb, var(--accent) 45%, var(--card)); }
 .cal-cell.l3 { background: color-mix(in srgb, var(--accent) 70%, var(--card)); }

@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Archive — AI Paper Digest{% endblock %}
 {% block content %}
-  <h1>Archive</h1>
-  {% include "calendar.html" %}
+  <header class="masthead">
+    <div class="masthead-info">
+      <h1>Archive</h1>
+      <p class="day-meta"><span class="stat">{{ days | length }} digest{{ "s" if days | length != 1 }}</span></p>
+    </div>
+    {% include "calendar.html" %}
+  </header>
   <ul class="archive-list">
     {% for day in days %}
     <li>
