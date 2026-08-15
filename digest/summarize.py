@@ -29,6 +29,19 @@ TOPICS = [
     "other",
 ]
 
+# Personal-relevance modifiers layered on the base breadth rubric. Edit this
+# block to retune what the digest's fold considers worth featuring.
+READER_PROFILE = (
+    "After the base rating, add one point (still capped at 5) if the paper strongly "
+    "matches the digest's reader profile — a hands-on software engineer who builds "
+    "with AI: LLM agents, tool use, and multi-agent orchestration; AI for software "
+    "engineering and code generation; running models efficiently on modest or local "
+    "hardware; reinforcement learning and AI for games or interactive environments; "
+    "AI applied to security or blockchain systems; and clearly educational work — "
+    "surveys, tutorials, rigorous empirical studies — whose lessons transfer beyond "
+    "their own setting. Add at most one point."
+)
+
 SYSTEM_PROMPT = (
     "You write entries for a public daily digest of new AI research papers. "
     "Given a paper's title and abstract, write a plain-language summary of two to four "
@@ -44,7 +57,8 @@ SYSTEM_PROMPT = (
     "following AI would want to know about; 4 = a notable advance relevant beyond its "
     "immediate subfield; 3 = a solid contribution of interest across its subfield; "
     "2 = incremental or narrowly scoped; 1 = a highly specific application or minor "
-    "variation offering little general insight. Rate breadth of relevance, not quality."
+    "variation offering little general insight. Rate breadth of relevance, not quality. "
+    + READER_PROFILE
 )
 
 OUTPUT_SCHEMA = {

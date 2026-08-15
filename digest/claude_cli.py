@@ -13,7 +13,7 @@ import re
 import subprocess
 import time
 
-from .summarize import TOPICS
+from .summarize import READER_PROFILE, TOPICS
 
 CHUNK_SIZE = 20
 CALL_TIMEOUT_SECONDS = 600
@@ -35,7 +35,7 @@ CHUNK_INSTRUCTIONS = (
     "notable advance relevant beyond its immediate subfield; 3 = a solid contribution "
     "of interest across its subfield; 2 = incremental or narrowly scoped; 1 = a highly "
     "specific application or minor variation offering little general insight. Rate "
-    "breadth of relevance, not paper quality.\n\n"
+    "breadth of relevance, not paper quality. " + READER_PROFILE + "\n\n"
     "Output ONLY a JSON array with one object per paper, in the form "
     '{"id": "<paper id>", "summary": "<2-4 sentences>", "topic": "<tag>", "interest": <1-5>}. '
     "No markdown fences, no commentary before or after the array.\n"
