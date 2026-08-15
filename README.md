@@ -25,6 +25,11 @@ topic tag, so a whole day of AI research can be scanned in minutes:
   longer summary written from the paper's full text.
 - **Everything else, grouped by topic.** LLMs, agents, reasoning, vision,
   safety, robotics and more — every entry links to its arXiv abstract page.
+  Each paper is rated for breadth of interest, and narrower papers collapse
+  into a compact title list per topic so a 400-paper day stays scannable.
+  The rating is editorial — what this digest considers interesting, helpful,
+  or educational — with community signals weighed strongly but not decisive;
+  nothing is ever removed, only folded.
 - **Follow along.** The [RSS feed](https://amarcu.github.io/ai-paper-digest/feed.xml)
   delivers each day's digest; the
   [archive](https://amarcu.github.io/ai-paper-digest/archive.html) keeps every
