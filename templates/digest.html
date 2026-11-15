@@ -23,12 +23,21 @@
     {% endfor %}
   </nav>
 
+  {% if day.audio %}
+  <section class="listen" id="listen">
+    <h2>Listen: today's pick</h2>
+    <p class="listen-title"><a href="#paper-{{ day.audio.paper_id }}">{{ day.audio.title }}</a></p>
+    <audio controls preload="none" src="{{ root }}{{ day.audio.file }}"></audio>
+    <p class="listen-script">{{ day.audio.script }}</p>
+  </section>
+  {% endif %}
+
   {% if highlights %}
   <section class="highlights" id="highlights">
     <h2>Highlights</h2>
     <div class="highlight-list">
       {% for paper in highlights %}
-      <details class="paper highlight">
+      <details class="paper highlight" id="paper-{{ paper.id }}">
         <summary>
           <h3>{{ paper.title }}</h3>
           <span class="paper-meta">

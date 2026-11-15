@@ -14,6 +14,9 @@
     <guid isPermaLink="true">{{ base_url }}archive/{{ day.date }}.html</guid>
     <pubDate>{{ day.pub_date }}</pubDate>
     <description>{{ day.feed_description | e }}</description>
+    {% if day.audio %}
+    <enclosure url="{{ base_url }}{{ day.audio.file }}" length="{{ day.audio.bytes }}" type="audio/mpeg"/>
+    {% endif %}
   </item>
   {% endfor %}
 </channel>

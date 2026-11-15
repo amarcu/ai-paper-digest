@@ -100,6 +100,14 @@ def _load_days(data_dir: Path) -> list[dict]:
         for paper in day["papers"]:
             if paper.get("highlight_summary"):
                 paper["highlight_blocks"] = _summary_blocks(paper["highlight_summary"])
+        # The feed enclosure needs the byte size; a recorded but missing file is dropped.
+        audio = day.get("audio")
+        if audio:
+            mp3 = data_dir / audio["file"]
+            if mp3.exists():
+                audio["bytes"] = mp3.stat().st_size
+            else:
+                day.pop("audio")
         days.append(day)
     return days
 
@@ -210,6 +218,11 @@ def render_site(data_dir: Path, out_dir: Path, base_url: str) -> int:
 
     (out_dir / "archive").mkdir(parents=True, exist_ok=True)
     shutil.copyfile(REPO_ROOT / "templates" / "style.css", out_dir / "style.css")
+    audio_files = sorted((data_dir / "audio").glob("*.mp3"))
+    if audio_files:
+        (out_dir / "audio").mkdir(exist_ok=True)
+        for mp3 in audio_files:
+            shutil.copyfile(mp3, out_dir / "audio" / mp3.name)
 
     calendar = _build_calendar(days, date_type.today())
 

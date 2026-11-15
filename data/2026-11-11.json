@@ -10619,5 +10619,13 @@
       "topic": "vision",
       "interest": 3
     }
-  ]
+  ],
+  "audio": {
+    "paper_id": "2611.14309",
+    "title": "MMDM: Measuring Massive Multitask Decision Making",
+    "script": "Today's pick from the AI Paper Digest. Some AI models decide by scoring a list of options all at once. Existing tests reuse public questions and rarely combine long inputs with many linked options. The authors built a fresh benchmark of new and rewritten questions. Some have several right answers. On those, the best model scored only about 37 percent. Models also struggled when options depend on each other. And high accuracy did not mean trustworthy confidence. So an accuracy score alone can mislead.",
+    "script_source": "model",
+    "file": "audio/2026-11-11.mp3",
+    "model": "eleven_flash_v2_5"
+  }
 }
