@@ -18,7 +18,11 @@ if [[ -f "$SETTINGS_FILE" ]]; then
     CLAUDE_CODE_OAUTH_TOKEN=$(/usr/bin/jq -r '.env.CLAUDE_CODE_OAUTH_TOKEN // ""' "$SETTINGS_FILE" 2>/dev/null || echo "")
     TELEGRAM_BOT_TOKEN=$(/usr/bin/jq -r '.env.TELEGRAM_BOT_TOKEN // ""' "$SETTINGS_FILE" 2>/dev/null || echo "")
     TELEGRAM_CHAT_ID=$(/usr/bin/jq -r '.env.TELEGRAM_CHAT_ID // ""' "$SETTINGS_FILE" 2>/dev/null || echo "")
+    ELEVENLABS_API_KEY=$(/usr/bin/jq -r '.env.ELEVENLABS_API_KEY // ""' "$SETTINGS_FILE" 2>/dev/null || echo "")
+    ELEVENLABS_VOICE_ID=$(/usr/bin/jq -r '.env.ELEVENLABS_VOICE_ID // ""' "$SETTINGS_FILE" 2>/dev/null || echo "")
+    ELEVENLABS_MODEL_ID=$(/usr/bin/jq -r '.env.ELEVENLABS_MODEL_ID // ""' "$SETTINGS_FILE" 2>/dev/null || echo "")
     export CLAUDE_CODE_OAUTH_TOKEN TELEGRAM_BOT_TOKEN TELEGRAM_CHAT_ID
+    export ELEVENLABS_API_KEY ELEVENLABS_VOICE_ID ELEVENLABS_MODEL_ID
 fi
 
 notify_failure() {
@@ -41,6 +45,15 @@ fi
 if [[ -z "$(git status --porcelain data/)" ]]; then
     echo "$LOG_PREFIX no data changes (weekend/holiday?) — nothing to push"
     exit 0
+fi
+
+# The audio briefing is additive: a failure warns but never blocks the text digest.
+if [[ -n "${ELEVENLABS_API_KEY:-}" && -n "${ELEVENLABS_VOICE_ID:-}" ]]; then
+    if ! .venv/bin/python -m digest.audio; then
+        notify_failure "audio briefing failed; the text digest still ships"
+    fi
+else
+    echo "$LOG_PREFIX ELEVENLABS_API_KEY or ELEVENLABS_VOICE_ID not set; skipping audio"
 fi
 
 git add data/

@@ -435,3 +435,10 @@ main > h1 {
   font-size: 1.7rem;
   margin: 1.8rem 0 0.5rem;
 }
+
+/* Spoken briefing of the day's top highlight */
+.listen { margin: 1.5rem 0 2rem; }
+.listen h2 { color: var(--accent); }
+.listen-title { margin: 0.3rem 0 0.6rem; font-weight: 600; }
+.listen audio { width: 100%; max-width: 32rem; }
+.listen-script { max-width: 42rem; line-height: 1.6; margin-top: 0.7rem; }
